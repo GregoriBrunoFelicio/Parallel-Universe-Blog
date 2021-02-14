@@ -129,3 +129,4 @@ C:\Users\GregoriBrunoFelicio\Desktop\Repositories\Universo.Paralello.Blog\src\Un
 C:\Users\GregoriBrunoFelicio\Desktop\Repositories\Universo.Paralello.Blog\src\Universo.Paralello.Blog.Api\obj\Debug\net5.0\ref\Universo.Paralello.Blog.Api.dll
 C:\Users\GregoriBrunoFelicio\Desktop\Repositories\Universo.Paralello.Blog\src\Universo.Paralello.Blog.Api\obj\Debug\net5.0\Universo.Paralello.Blog.Api.pdb
 C:\Users\GregoriBrunoFelicio\Desktop\Repositories\Universo.Paralello.Blog\src\Universo.Paralello.Blog.Api\obj\Debug\net5.0\Universo.Paralello.Blog.Api.genruntimeconfig.cache
+C:\Users\GregoriBrunoFelicio\Desktop\Repositories\Universo.Paralello.Blog\src\Universo.Paralello.Blog.Api\obj\Debug\net5.0\Universo.Paralello.Blog.Api.csprojAssemblyReference.cache

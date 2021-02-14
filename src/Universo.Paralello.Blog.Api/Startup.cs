@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Internal;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -11,6 +12,7 @@ using Microsoft.OpenApi.Models;
 using Universo.Paralello.Blog.Api.Data;
 using Universo.Paralello.Blog.Api.Data.Repositories;
 using Universo.Paralello.Blog.Api.Services;
+using Universo.Paralello.Blog.Api.Shared;
 
 namespace Universo.Paralello.Blog.Api
 {
@@ -32,38 +34,9 @@ namespace Universo.Paralello.Blog.Api
                 x.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"))
                     .UseLazyLoadingProxies()); ;
 
-            ConfigureSwagger(services);
-
-            services.AddAuthentication(x =>
-            {
-                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            });
-
-            var key = Encoding.ASCII.GetBytes(Configuration.GetSection("TokenConfiguration").GetSection("Key").Value);
-            services.AddAuthentication(x =>
-                {
-                    x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                    x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-                })
-                .AddJwtBearer(x =>
-                {
-                    x.RequireHttpsMetadata = true;
-                    x.SaveToken = true;
-                    x.TokenValidationParameters = new TokenValidationParameters
-                    {
-                        ValidateIssuer = false,
-                        ValidateAudience = false,
-                        ValidateIssuerSigningKey = true,
-                        ValidateLifetime = true,
-                        IssuerSigningKey = new SymmetricSecurityKey(key),
-                    };
-                });
-
-            services.AddScoped<IUsuarioRepository, UsuarioRepository>();
-            services.AddScoped<IContaRepository, ContaRepository>();
-            services.AddScoped<IContaService, ContaService>();
-            services.AddScoped<ITokenService, TokenService>();
+            Swagger.Configure(services);
+            Ioc.RegisterServices(services);
+            Authentication.Configure(services, Configuration.GetSection("TokenConfiguration").GetSection("Key").Value);
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -83,14 +56,6 @@ namespace Universo.Paralello.Blog.Api
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
-            });
-        }
-
-        private static void ConfigureSwagger(IServiceCollection services)
-        {
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Universo.Paralello.Blog.Api", Version = "v1" });
             });
         }
     }
