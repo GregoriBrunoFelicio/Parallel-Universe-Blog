@@ -3,7 +3,7 @@ using FluentAssertions;
 using NUnit.Framework;
 using Universo.Paralello.Blog.Api.Shared.ValueObjects;
 
-namespace Universo.Paralello.Blog.Tests.TestesDeUnidade.ValueObjects
+namespace Universo.Paralello.Blog.Tests.UnitTests.ValueObjects
 {
     public class SenhaTests
     {
@@ -24,7 +24,7 @@ namespace Universo.Paralello.Blog.Tests.TestesDeUnidade.ValueObjects
             var valor = _faker.Random.Word();
             var senha = new Senha(valor);
             senha.Criptografar();
-            senha.Verificar(valor).Should().BeTrue();
+            senha.Verificar(valor).Should().BeFalse();
         }
 
         [Test]

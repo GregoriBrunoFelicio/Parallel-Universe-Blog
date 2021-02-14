@@ -11,7 +11,7 @@ using Universo.Paralello.Blog.Api.Services.Results;
 using Universo.Paralello.Blog.Api.ViewModels;
 using Universo.Paralello.Blog.Tests.Shared.Builders;
 
-namespace Universo.Paralello.Blog.Tests.TestesDeUnidade.Services
+namespace Universo.Paralello.Blog.Tests.UnitTests.Services
 {
     public class ContaServiceTests
     {
