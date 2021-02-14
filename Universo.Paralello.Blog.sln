@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30907.101
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Universo.Paralello.Blog.Tests", "src\Universo.Paralello.Blog.Unit.Tests\Universo.Paralello.Blog.Tests.csproj", "{90D0D1C1-FE76-491C-BD9B-50135F105631}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Universo.Paralello.Blog.Api", "src\Universo.Paralello.Blog.Api\Universo.Paralello.Blog.Api.csproj", "{85A05D37-4F22-4AB8-8312-08BEB11F7C7E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{90D0D1C1-FE76-491C-BD9B-50135F105631}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{90D0D1C1-FE76-491C-BD9B-50135F105631}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{90D0D1C1-FE76-491C-BD9B-50135F105631}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{90D0D1C1-FE76-491C-BD9B-50135F105631}.Release|Any CPU.Build.0 = Release|Any CPU
+		{85A05D37-4F22-4AB8-8312-08BEB11F7C7E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{85A05D37-4F22-4AB8-8312-08BEB11F7C7E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{85A05D37-4F22-4AB8-8312-08BEB11F7C7E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{85A05D37-4F22-4AB8-8312-08BEB11F7C7E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9023304F-4FA7-4994-AFB3-25EFD9AB1FE2}
+	EndGlobalSection
+EndGlobal
