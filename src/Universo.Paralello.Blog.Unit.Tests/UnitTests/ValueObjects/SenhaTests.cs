@@ -24,7 +24,7 @@ namespace Universo.Paralello.Blog.Tests.UnitTests.ValueObjects
             var valor = _faker.Random.Word();
             var senha = new Senha(valor);
             senha.Criptografar();
-            senha.Verificar(valor).Should().BeFalse();
+            senha.Verificar(valor).Should().BeTrue();
         }
 
         [Test]
