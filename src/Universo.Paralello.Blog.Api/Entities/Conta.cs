@@ -3,7 +3,7 @@ using Universo.Paralello.Blog.Api.Shared.ValueObjects;
 
 namespace Universo.Paralello.Blog.Api.Entities
 {
-    public class Conta : Entidade
+    public class Conta : Entity
     {
         public Conta() { }
 

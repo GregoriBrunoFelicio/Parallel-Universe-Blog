@@ -1,6 +1,6 @@
 ﻿namespace Universo.Paralello.Blog.Api.Entities
 {
-    public class Usuario : Entidade
+    public class Usuario : Entity
     {
         public Usuario() {}
 

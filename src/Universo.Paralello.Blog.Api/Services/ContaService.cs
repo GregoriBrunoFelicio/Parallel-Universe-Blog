@@ -9,7 +9,7 @@ namespace Universo.Paralello.Blog.Api.Services
 {
     public interface IContaService
     {
-        Task<IResult> Cadastrar(CriacaoDeUsuarioViewModel model);
+        Task<IResult> Criar(CriacaoDeUsuarioViewModel model);
         Task<IUsuarioLoginResult> Autenticar(LoginViewModel model);
     }
 
@@ -28,7 +28,7 @@ namespace Universo.Paralello.Blog.Api.Services
             _mapper = mapper;
         }
 
-        public async Task<IResult> Cadastrar(CriacaoDeUsuarioViewModel model)
+        public async Task<IResult> Criar(CriacaoDeUsuarioViewModel model)
         {
             if (await EmailJaCadastrado(model.Conta.Email)) return new Result("Email já cadastrado.", false);
 

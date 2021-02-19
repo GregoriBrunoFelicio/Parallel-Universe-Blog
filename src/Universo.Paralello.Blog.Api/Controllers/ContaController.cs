@@ -19,15 +19,19 @@ namespace Universo.Paralello.Blog.Api.Controllers
         [HttpPost("Criar")]
         public async Task<IActionResult> Criar([FromBody] CriacaoDeUsuarioViewModel model)
         {
-            var resultado = await _contaService.Cadastrar(model);
-            return !resultado.Sucesso ? (IActionResult) BadRequest(resultado.Mensagem) : Ok(resultado.Mensagem);
+            var resultado = await _contaService.Criar(model);
+            return !resultado.Sucesso
+                ? (IActionResult) BadRequest(resultado.Mensagem) 
+                : Ok(resultado.Mensagem);
         }
 
         [HttpPost("Login")]
         public async Task<IActionResult> Login([FromBody] LoginViewModel model)
         {
             var resultado = await _contaService.Autenticar(model);
-            return !resultado.Sucesso ? (IActionResult) BadRequest(resultado.Mensagem) : Ok(resultado);
+            return !resultado.Sucesso 
+                ? (IActionResult) BadRequest(resultado.Mensagem)
+                : Ok(resultado);
         }
     }
 }
