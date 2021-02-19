@@ -11,6 +11,6 @@ namespace Universo.Paralello.Blog.Tests.Shared.Builders
                 new Usuario(
                     f.Random.Int(1, 100),
                     f.Random.Word(),
-                    new Conta(f.Random.Int(1, 100), f.Random.Word(), new Senha(f.Random.Words()))));
+                    new ContaBuilder()));
     }
 }
