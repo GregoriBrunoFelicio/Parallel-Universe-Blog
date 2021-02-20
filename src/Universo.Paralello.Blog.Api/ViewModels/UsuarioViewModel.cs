@@ -12,10 +12,7 @@ namespace Universo.Paralello.Blog.Api.ViewModels
 
         [StringLength(50, ErrorMessage = "O Nome deve ter entre {2} e {1} caracteres.", MinimumLength = 5)]
         public string Sobre { get; set; }
-    }
 
-    public class CriacaoDeUsuarioViewModel : UsuarioViewModel
-    {
         public ContaViewModel Conta { get; set; }
     }
 }

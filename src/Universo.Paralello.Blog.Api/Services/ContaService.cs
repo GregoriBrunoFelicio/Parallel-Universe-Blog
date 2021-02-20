@@ -9,7 +9,7 @@ namespace Universo.Paralello.Blog.Api.Services
 {
     public interface IContaService
     {
-        Task<IResult> Criar(CriacaoDeUsuarioViewModel model);
+        Task<IResult> Criar(UsuarioViewModel model);
         Task<IUsuarioLoginResult> Autenticar(LoginViewModel model);
     }
 
@@ -28,11 +28,11 @@ namespace Universo.Paralello.Blog.Api.Services
             _mapper = mapper;
         }
 
-        public async Task<IResult> Criar(CriacaoDeUsuarioViewModel model)
+        public async Task<IResult> Criar(UsuarioViewModel model)
         {
             if (await EmailJaCadastrado(model.Conta.Email)) return new Result("Email já cadastrado.", false);
 
-            var usuario = _mapper.Map<CriacaoDeUsuarioViewModel, Usuario>(model);
+            var usuario = _mapper.Map<UsuarioViewModel, Usuario>(model);
 
             usuario.Conta.Senha.Criptografar();
 

@@ -22,6 +22,8 @@ namespace Universo.Paralello.Blog.Tests.UnitTests.Services
         protected IContaService ContaService;
         protected UsuarioBuilder UsuarioBuilder;
         protected ContaBuilder ContaBuilder;
+        protected UsuarioViewModelBuilder UsuarioViewModelBuilder;
+        protected ContaViewModelBuilder ContaViewModelBuilder;
 
         [OneTimeSetUp]
         public void SetUp()
@@ -33,6 +35,8 @@ namespace Universo.Paralello.Blog.Tests.UnitTests.Services
 
             UsuarioBuilder = new UsuarioBuilder();
             ContaBuilder = new ContaBuilder();
+            UsuarioViewModelBuilder = new UsuarioViewModelBuilder();
+            ContaViewModelBuilder = new ContaViewModelBuilder();
 
             ContaService = new ContaService(
                 UsuarioRepositoryMock.Object,
@@ -49,10 +53,10 @@ namespace Universo.Paralello.Blog.Tests.UnitTests.Services
         [OneTimeSetUp]
         public new async Task SetUp()
         {
-            var model = new AutoFaker<CriacaoDeUsuarioViewModel>().Generate();
+            var model = UsuarioViewModelBuilder.WithConta().Generate();
             var usuario = UsuarioBuilder.Generate();
 
-            MapperMock.Setup(x => x.Map<CriacaoDeUsuarioViewModel, Usuario>(model)).Returns(usuario);
+            MapperMock.Setup(x => x.Map<UsuarioViewModel, Usuario>(model)).Returns(usuario);
             _resultado = await ContaService.Criar(model);
         }
 
@@ -61,7 +65,7 @@ namespace Universo.Paralello.Blog.Tests.UnitTests.Services
 
         [Test]
         public void DeveChamarOMetodoDeMap() =>
-            MapperMock.Verify(x => x.Map<CriacaoDeUsuarioViewModel, Usuario>(It.IsAny<CriacaoDeUsuarioViewModel>()), Times.Once);
+            MapperMock.Verify(x => x.Map<UsuarioViewModel, Usuario>(It.IsAny<UsuarioViewModel>()), Times.Once);
 
         [Test]
         public void DeveChamarMetodoAddAsync() => UsuarioRepositoryMock.Verify(x => x.AddAsync(It.IsAny<Usuario>()), Times.Once);
@@ -81,7 +85,7 @@ namespace Universo.Paralello.Blog.Tests.UnitTests.Services
         [OneTimeSetUp]
         public new async Task SetUp()
         {
-            var model = new AutoFaker<CriacaoDeUsuarioViewModel>().Generate();
+            var model = UsuarioViewModelBuilder.WithConta().Generate();
             ContaRepositoryMock.Setup(x => x.GetByEmailAsync(It.IsAny<string>())).ReturnsAsync(new Conta());
             _resultado = await ContaService.Criar(model);
         }
@@ -102,7 +106,7 @@ namespace Universo.Paralello.Blog.Tests.UnitTests.Services
         public new async Task SetUp()
         {
             var conta = ContaBuilder.Generate();
-            _model = new AutoFaker<LoginViewModel>().Generate();
+            _model = new LoginViewModel();
 
             _model.Senha = conta.Senha.Valor;
             conta.Senha.Criptografar();

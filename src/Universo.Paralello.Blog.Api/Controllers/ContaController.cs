@@ -16,8 +16,9 @@ namespace Universo.Paralello.Blog.Api.Controllers
             _contaService = contaService;
         }
 
+
         [HttpPost("Criar")]
-        public async Task<IActionResult> Criar([FromBody] CriacaoDeUsuarioViewModel model)
+        public async Task<IActionResult> Criar([FromBody] UsuarioViewModel model)
         {
             var resultado = await _contaService.Criar(model);
             return !resultado.Sucesso

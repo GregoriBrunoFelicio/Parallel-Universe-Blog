@@ -27,7 +27,7 @@ namespace Universo.Paralello.Blog.Api
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
+            services.AddControllers().ConfigureApiBehaviorOptions(options => options.SuppressModelStateInvalidFilter = true);
             services.AddAutoMapper(typeof(Startup));
 
             services.AddDbContext<UniversoParalelloBlogContext>(x =>

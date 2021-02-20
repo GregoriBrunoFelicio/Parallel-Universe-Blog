@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "IEZ0OI41UaD0hFKnj4F9YbbOGVpnCt0CRlm4NA09AddtEpsISAb1Dgq7Zy2PLpCrDdhl0l0SZJwPBw0OWFkiwg==",
+  "dgSpecHash": "r/st2zRF1Bs5HkTiX2ndyCyHd5To8p8R7QIaNPmZI2j5gXxHqwDWm05ZVOxbT1BFzjbMCIjQCgM2qDJMQQO5rQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\GregoriBrunoFelicio\\Desktop\\Repositories\\Universo.Paralello.Blog\\src\\Universo.Paralello.Blog.Api\\Universo.Paralello.Blog.Api.csproj",
   "expectedPackageFiles": [
@@ -17,6 +17,7 @@
     "C:\\Users\\GregoriBrunoFelicio\\.nuget\\packages\\microsoft.entityframeworkcore.abstractions\\5.0.3\\microsoft.entityframeworkcore.abstractions.5.0.3.nupkg.sha512",
     "C:\\Users\\GregoriBrunoFelicio\\.nuget\\packages\\microsoft.entityframeworkcore.analyzers\\5.0.3\\microsoft.entityframeworkcore.analyzers.5.0.3.nupkg.sha512",
     "C:\\Users\\GregoriBrunoFelicio\\.nuget\\packages\\microsoft.entityframeworkcore.design\\5.0.3\\microsoft.entityframeworkcore.design.5.0.3.nupkg.sha512",
+    "C:\\Users\\GregoriBrunoFelicio\\.nuget\\packages\\microsoft.entityframeworkcore.inmemory\\5.0.3\\microsoft.entityframeworkcore.inmemory.5.0.3.nupkg.sha512",
     "C:\\Users\\GregoriBrunoFelicio\\.nuget\\packages\\microsoft.entityframeworkcore.proxies\\5.0.3\\microsoft.entityframeworkcore.proxies.5.0.3.nupkg.sha512",
     "C:\\Users\\GregoriBrunoFelicio\\.nuget\\packages\\microsoft.entityframeworkcore.relational\\5.0.3\\microsoft.entityframeworkcore.relational.5.0.3.nupkg.sha512",
     "C:\\Users\\GregoriBrunoFelicio\\.nuget\\packages\\microsoft.entityframeworkcore.sqlserver\\5.0.3\\microsoft.entityframeworkcore.sqlserver.5.0.3.nupkg.sha512",

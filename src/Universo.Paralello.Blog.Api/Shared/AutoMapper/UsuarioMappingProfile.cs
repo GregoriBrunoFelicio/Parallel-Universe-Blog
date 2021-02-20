@@ -9,9 +9,8 @@ namespace Universo.Paralello.Blog.Api.Shared.AutoMapper
     {
         public UsuarioMappingProfile()
         {
-            CreateMap<CriacaoDeUsuarioViewModel, Usuario>().ConstructUsing(x =>
+            CreateMap<UsuarioViewModel, Usuario>().ConstructUsing(x =>
                 new Usuario(x.Id, x.Nome, new Conta(x.Conta.Id, x.Conta.Email, new Senha(x.Conta.Senha))));
-            CreateMap<UsuarioViewModel, Usuario>().ConstructUsing(x => new Usuario(x.Id, x.Nome, x.Sobre));
         }
     }
 }

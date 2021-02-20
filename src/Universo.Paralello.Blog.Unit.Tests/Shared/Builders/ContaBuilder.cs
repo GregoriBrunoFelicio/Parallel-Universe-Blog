@@ -9,6 +9,6 @@ namespace Universo.Paralello.Blog.Tests.Shared.Builders
         public ContaBuilder() =>
             CustomInstantiator(f =>
                 new Conta(f.Random.Int(1, 100),
-                    f.Random.Word(), new Senha(f.Random.Words())));
+                    f.Internet.Email(), new Senha(f.Random.Words())));
     }
 }

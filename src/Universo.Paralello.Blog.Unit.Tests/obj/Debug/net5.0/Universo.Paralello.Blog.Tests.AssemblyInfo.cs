@@ -11,6 +11,9 @@
 using System;
 using System.Reflection;
 
+[assembly: Microsoft.AspNetCore.Mvc.Testing.WebApplicationFactoryContentRootAttribute("Universo.Paralello.Blog.Api, Version=1.0.0.0, Culture=neutral, PublicKeyToken=nul" +
+    "l", "C:\\Users\\GregoriBrunoFelicio\\Desktop\\Repositories\\Universo.Paralello.Blog\\src\\Uni" +
+    "verso.Paralello.Blog.Api", "Universo.Paralello.Blog.Api.csproj", "0")]
 [assembly: System.Reflection.AssemblyCompanyAttribute("Universo.Paralello.Blog.Tests")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]

@@ -1,6 +1,5 @@
 ﻿using Bogus;
 using Universo.Paralello.Blog.Api.Entities;
-using Universo.Paralello.Blog.Api.Shared.ValueObjects;
 
 namespace Universo.Paralello.Blog.Tests.Shared.Builders
 {

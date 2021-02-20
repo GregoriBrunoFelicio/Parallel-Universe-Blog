@@ -29,6 +29,7 @@
           "BCrypt.Net-Next": "4.0.2",
           "Microsoft.AspNetCore.Authentication.JwtBearer": "5.0.3",
           "Microsoft.EntityFrameworkCore": "5.0.3",
+          "Microsoft.EntityFrameworkCore.InMemory": "5.0.3",
           "Microsoft.EntityFrameworkCore.Proxies": "5.0.3",
           "Microsoft.EntityFrameworkCore.SqlServer": "5.0.3",
           "Microsoft.EntityFrameworkCore.Tools": "5.0.3",
@@ -536,6 +537,20 @@
             "assemblyVersion": "5.0.3.0",
             "fileVersion": "5.0.321.6417"
           }
+        }
+      },
+      "Microsoft.EntityFrameworkCore.InMemory/5.0.3": {
+        "dependencies": {
+          "Microsoft.EntityFrameworkCore": "5.0.3"
+        },
+        "runtime": {
+          "lib/netstandard2.1/Microsoft.EntityFrameworkCore.InMemory.dll": {
+            "assemblyVersion": "5.0.3.0",
+            "fileVersion": "5.0.321.6417"
+          }
+        },
+        "compile": {
+          "lib/netstandard2.1/Microsoft.EntityFrameworkCore.InMemory.dll": {}
         }
       },
       "Microsoft.EntityFrameworkCore.Proxies/5.0.3": {
@@ -3534,6 +3549,13 @@
       "sha512": "sha512-1xEtecvkmCb3jBwwSDF4mI7DDJcDayRPdhpuoCBl0A+6IGu16qGhG9RSmPQahfVyiuxQnrem/YtbLVDWpaGYEw==",
       "path": "microsoft.entityframeworkcore.design/5.0.3",
       "hashPath": "microsoft.entityframeworkcore.design.5.0.3.nupkg.sha512"
+    },
+    "Microsoft.EntityFrameworkCore.InMemory/5.0.3": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-TWNs01wuxmtYS8tThmOW2YPXjZEMUiStFWYw/vCIYfru+wlgQa/OAQxQjIJyFpRgy6ORj3KSqZkXbkjjHRv7MQ==",
+      "path": "microsoft.entityframeworkcore.inmemory/5.0.3",
+      "hashPath": "microsoft.entityframeworkcore.inmemory.5.0.3.nupkg.sha512"
     },
     "Microsoft.EntityFrameworkCore.Proxies/5.0.3": {
       "type": "package",
