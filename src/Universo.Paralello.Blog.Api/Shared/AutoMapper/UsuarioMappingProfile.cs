@@ -1,16 +1,14 @@
 ﻿using AutoMapper;
-using Universo.Paralello.Blog.Api.Entities;
-using Universo.Paralello.Blog.Api.Shared.ValueObjects;
-using Universo.Paralello.Blog.Api.ViewModels;
+using Parallel.Universe.Blog.Api.Entities;
+using Parallel.Universe.Blog.Api.Shared.ValueObjects;
+using Parallel.Universe.Blog.Api.ViewModels;
 
-namespace Universo.Paralello.Blog.Api.Shared.AutoMapper
+namespace Parallel.Universe.Blog.Api.Shared.AutoMapper
 {
-    public class UsuarioMappingProfile: Profile
+    public class UserMappingProfile: Profile
     {
-        public UsuarioMappingProfile()
-        {
-            CreateMap<UsuarioViewModel, Usuario>().ConstructUsing(x =>
-                new Usuario(x.Id, x.Nome, new Conta(x.Conta.Id, x.Conta.Email, new Senha(x.Conta.Senha))));
-        }
+        public UserMappingProfile() =>
+            CreateMap<UserViewModel, User>().ConstructUsing(x =>
+                new User(x.Id, x.Name, new Account(x.Account.Id, x.Account.Email, new Password(x.Account.Email))));
     }
 }

@@ -2624,7 +2624,7 @@
           "lib/dotnet/xunit.core.dll": {}
         }
       },
-      "Universo.Paralello.Blog.Api/1.0.0": {
+      "Parallel.Universe.Blog.Api/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v5.0",
         "dependencies": {
@@ -2639,10 +2639,10 @@
           "automapper": "10.1.1"
         },
         "compile": {
-          "bin/placeholder/Universo.Paralello.Blog.Api.dll": {}
+          "bin/placeholder/Parallel.Universe.Blog.Api.dll": {}
         },
         "runtime": {
-          "bin/placeholder/Universo.Paralello.Blog.Api.dll": {}
+          "bin/placeholder/Parallel.Universe.Blog.Api.dll": {}
         },
         "frameworkReferences": [
           "Microsoft.AspNetCore.App"
@@ -8675,10 +8675,10 @@
         "xunit.extensibility.core.nuspec"
       ]
     },
-    "Universo.Paralello.Blog.Api/1.0.0": {
+    "Parallel.Universe.Blog.Api/1.0.0": {
       "type": "project",
-      "path": "../Universo.Paralello.Blog.Api/Universo.Paralello.Blog.Api.csproj",
-      "msbuildProject": "../Universo.Paralello.Blog.Api/Universo.Paralello.Blog.Api.csproj"
+      "path": "../Universo.Paralello.Blog.Api/Parallel.Universe.Blog.Api.csproj",
+      "msbuildProject": "../Universo.Paralello.Blog.Api/Parallel.Universe.Blog.Api.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -8691,7 +8691,7 @@
       "Microsoft.NET.Test.Sdk >= 16.5.0",
       "NUnit >= 3.12.0",
       "NUnit3TestAdapter >= 3.16.1",
-      "Universo.Paralello.Blog.Api >= 1.0.0",
+      "Parallel.Universe.Blog.Api >= 1.0.0",
       "moq >= 4.16.0",
       "xunit.extensibility.core >= 2.1.0"
     ]
@@ -8703,9 +8703,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\GregoriBrunoFelicio\\Desktop\\Repositories\\Universo.Paralello.Blog\\src\\Universo.Paralello.Blog.Unit.Tests\\Universo.Paralello.Blog.Tests.csproj",
-      "projectName": "Universo.Paralello.Blog.Tests",
-      "projectPath": "C:\\Users\\GregoriBrunoFelicio\\Desktop\\Repositories\\Universo.Paralello.Blog\\src\\Universo.Paralello.Blog.Unit.Tests\\Universo.Paralello.Blog.Tests.csproj",
+      "projectUniqueName": "C:\\Users\\GregoriBrunoFelicio\\Desktop\\Repositories\\Universo.Paralello.Blog\\src\\Universo.Paralello.Blog.Unit.Tests\\Parallel.Universe.Blog.Tests.csproj",
+      "projectName": "Parallel.Universe.Blog.Tests",
+      "projectPath": "C:\\Users\\GregoriBrunoFelicio\\Desktop\\Repositories\\Universo.Paralello.Blog\\src\\Universo.Paralello.Blog.Unit.Tests\\Parallel.Universe.Blog.Tests.csproj",
       "packagesPath": "C:\\Users\\GregoriBrunoFelicio\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\GregoriBrunoFelicio\\Desktop\\Repositories\\Universo.Paralello.Blog\\src\\Universo.Paralello.Blog.Unit.Tests\\obj\\",
       "projectStyle": "PackageReference",
@@ -8728,8 +8728,8 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "projectReferences": {
-            "C:\\Users\\GregoriBrunoFelicio\\Desktop\\Repositories\\Universo.Paralello.Blog\\src\\Universo.Paralello.Blog.Api\\Universo.Paralello.Blog.Api.csproj": {
-              "projectPath": "C:\\Users\\GregoriBrunoFelicio\\Desktop\\Repositories\\Universo.Paralello.Blog\\src\\Universo.Paralello.Blog.Api\\Universo.Paralello.Blog.Api.csproj"
+            "C:\\Users\\GregoriBrunoFelicio\\Desktop\\Repositories\\Universo.Paralello.Blog\\src\\Universo.Paralello.Blog.Api\\Parallel.Universe.Blog.Api.csproj": {
+              "projectPath": "C:\\Users\\GregoriBrunoFelicio\\Desktop\\Repositories\\Universo.Paralello.Blog\\src\\Universo.Paralello.Blog.Api\\Parallel.Universe.Blog.Api.csproj"
             }
           }
         }

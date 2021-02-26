@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "XltKnnQCcdV/GYR/jt2OI5ZqufkcLwUhhf26TFK0XuJFdlTjHDtPxUeIfNkTEu+6M5tdgiZQApxXtdguTXxfdQ==",
+  "dgSpecHash": "otzYiyNjIuI9t9VtRzss8kQstZ4ZL+ISjkVzst6QRjfXzB8ThFMBP1nAvf8pCRznyeQPRi2vYn2txKrNpOW/3w==",
   "success": true,
-  "projectFilePath": "C:\\Users\\GregoriBrunoFelicio\\Desktop\\Repositories\\Universo.Paralello.Blog\\src\\Universo.Paralello.Blog.Unit.Tests\\Universo.Paralello.Blog.Tests.csproj",
+  "projectFilePath": "C:\\Users\\GregoriBrunoFelicio\\Desktop\\Repositories\\Universo.Paralello.Blog\\src\\Universo.Paralello.Blog.Unit.Tests\\Parallel.Universe.Blog.Tests.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\GregoriBrunoFelicio\\.nuget\\packages\\autobogus\\2.12.0\\autobogus.2.12.0.nupkg.sha512",
     "C:\\Users\\GregoriBrunoFelicio\\.nuget\\packages\\automapper\\10.1.1\\automapper.10.1.1.nupkg.sha512",

@@ -1,15 +1,15 @@
 ﻿using Bogus;
-using Universo.Paralello.Blog.Api.Entities;
+using Parallel.Universe.Blog.Api.Entities;
 
-namespace Universo.Paralello.Blog.Tests.Shared.Builders
+namespace Parallel.Universe.Blog.Tests.Shared.Builders
 {
-    public sealed class UsuarioBuilder : Faker<Usuario>
+    public sealed class UsuarioBuilder : Faker<User>
     {
         public UsuarioBuilder() =>
             CustomInstantiator(f =>
-                new Usuario(
+                new User(
                     f.Random.Int(1, 100),
                     f.Random.Word(),
-                    new ContaBuilder()));
+                    new AccountBuilder()));
     }
 }

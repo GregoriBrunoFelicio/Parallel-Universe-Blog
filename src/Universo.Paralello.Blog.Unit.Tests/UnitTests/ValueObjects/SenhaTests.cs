@@ -1,39 +1,39 @@
 ﻿using Bogus;
 using FluentAssertions;
 using NUnit.Framework;
-using Universo.Paralello.Blog.Api.Shared.ValueObjects;
+using Parallel.Universe.Blog.Api.Shared.ValueObjects;
 
-namespace Universo.Paralello.Blog.Tests.UnitTests.ValueObjects
+namespace Parallel.Universe.Blog.Tests.UnitTests.ValueObjects
 {
-    public class SenhaTests
+    public class PaswordTests
     {
         private readonly Faker _faker = new Faker();
 
         [Test]
-        public void DeveCriptografarASenhaInformada()
+        public void ShouldEncryptTheRecivedPassword()
         {
-            var valor = _faker.Random.Word();
-            var senha = new Senha(valor);
-            senha.Criptografar();
-            valor.Should().NotBe(senha.Valor);
+            var value = _faker.Random.Word();
+            var password = new Password(value);
+            password.Encrypt();
+            value.Should().NotBe(password.Value);
         }
 
         [Test]
-        public void DeveRetornarVerdadeiroSeASenhaEstiverCorreta()
+        public void ShouldReturnTrueWhenThePasswordIsNotCorrect()
         {
-            var valor = _faker.Random.Word();
-            var senha = new Senha(valor);
-            senha.Criptografar();
-            senha.Verificar(valor).Should().BeTrue();
+            var value = _faker.Random.Word();
+            var password = new Password(value);
+            password.Encrypt();
+            password.VerifyPassword(value).Should().BeTrue();
         }
 
         [Test]
-        public void DeveRetornarFalsoSeASenhaEstiverIncorreta()
+        public void ShouldReturnFalseWhenThePasswordIsNotCorrect()
         {
-            var valor = _faker.Random.Word();
-            var senha = new Senha(valor);
-            senha.Criptografar();
-            senha.Verificar($"{valor}123").Should().BeFalse();
+            var value = _faker.Random.Word();
+            var password = new Password(value);
+            password.Encrypt();
+            password.VerifyPassword($"{value}123").Should().BeFalse();
         }
     }
 }

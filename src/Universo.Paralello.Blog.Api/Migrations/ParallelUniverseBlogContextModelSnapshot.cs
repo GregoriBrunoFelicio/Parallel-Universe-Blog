@@ -3,12 +3,12 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Universo.Paralello.Blog.Api.Data;
+using Parallel.Universe.Blog.Api.Data;
 
-namespace Universo.Paralello.Blog.Api.Migrations
+namespace Parallel.Universe.Blog.Api.Migrations
 {
-    [DbContext(typeof(UniversoParalelloBlogContext))]
-    partial class UniversoParalelloBlogContextModelSnapshot : ModelSnapshot
+    [DbContext(typeof(ParallelUniverseBlogContext))]
+    partial class ParallelUniverseBlogContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
@@ -18,7 +18,7 @@ namespace Universo.Paralello.Blog.Api.Migrations
                 .HasAnnotation("ProductVersion", "5.0.3")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("Universo.Paralello.Blog.Api.Entities.Conta", b =>
+            modelBuilder.Entity("Parallel.Universe.Blog.Api.Entities.Account", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -30,74 +30,74 @@ namespace Universo.Paralello.Blog.Api.Migrations
                         .HasMaxLength(30)
                         .HasColumnType("varchar(30)");
 
-                    b.Property<int>("UsuarioId")
+                    b.Property<int>("UserId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UsuarioId")
+                    b.HasIndex("UserId")
                         .IsUnique();
 
-                    b.ToTable("Conta");
+                    b.ToTable("Account");
                 });
 
-            modelBuilder.Entity("Universo.Paralello.Blog.Api.Entities.Usuario", b =>
+            modelBuilder.Entity("Parallel.Universe.Blog.Api.Entities.User", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Nome")
+                    b.Property<string>("About")
+                        .HasMaxLength(500)
+                        .HasColumnType("varchar(500)");
+
+                    b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("varchar(50)");
 
-                    b.Property<string>("Sobre")
-                        .HasMaxLength(500)
-                        .HasColumnType("varchar(500)");
-
                     b.HasKey("Id");
 
-                    b.ToTable("Usuario");
+                    b.ToTable("User");
                 });
 
-            modelBuilder.Entity("Universo.Paralello.Blog.Api.Entities.Conta", b =>
+            modelBuilder.Entity("Parallel.Universe.Blog.Api.Entities.Account", b =>
                 {
-                    b.HasOne("Universo.Paralello.Blog.Api.Entities.Usuario", "Usuario")
-                        .WithOne("Conta")
-                        .HasForeignKey("Universo.Paralello.Blog.Api.Entities.Conta", "UsuarioId")
+                    b.HasOne("Parallel.Universe.Blog.Api.Entities.User", "User")
+                        .WithOne("Account")
+                        .HasForeignKey("Parallel.Universe.Blog.Api.Entities.Account", "UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.OwnsOne("Universo.Paralello.Blog.Api.Shared.Senha", "Senha", b1 =>
+                    b.OwnsOne("Parallel.Universe.Blog.Api.Shared.ValueObjects.Password", "Password", b1 =>
                         {
-                            b1.Property<int>("ContaId")
+                            b1.Property<int>("AccountId")
                                 .ValueGeneratedOnAdd()
                                 .HasColumnType("int")
                                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                            b1.Property<string>("Valor")
+                            b1.Property<string>("Value")
                                 .IsRequired()
                                 .HasColumnType("varchar(MAX)")
-                                .HasColumnName("Senha");
+                                .HasColumnName("Password");
 
-                            b1.HasKey("ContaId");
+                            b1.HasKey("AccountId");
 
-                            b1.ToTable("Conta");
+                            b1.ToTable("Account");
 
                             b1.WithOwner()
-                                .HasForeignKey("ContaId");
+                                .HasForeignKey("AccountId");
                         });
 
-                    b.Navigation("Senha");
+                    b.Navigation("Password");
 
-                    b.Navigation("Usuario");
+                    b.Navigation("User");
                 });
 
-            modelBuilder.Entity("Universo.Paralello.Blog.Api.Entities.Usuario", b =>
+            modelBuilder.Entity("Parallel.Universe.Blog.Api.Entities.User", b =>
                 {
-                    b.Navigation("Conta");
+                    b.Navigation("Account");
                 });
 #pragma warning restore 612, 618
         }

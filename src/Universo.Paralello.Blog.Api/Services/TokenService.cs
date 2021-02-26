@@ -4,25 +4,22 @@ using System.Security.Claims;
 using System.Text;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
-using Universo.Paralello.Blog.Api.Entities;
+using Parallel.Universe.Blog.Api.Entities;
 
-namespace Universo.Paralello.Blog.Api.Services
+namespace Parallel.Universe.Blog.Api.Services
 {
     public interface ITokenService
     {
-        string GerarToken(Usuario usuario);
+        string GenerateToken(User usuario);
     }
 
     public class TokenService: ITokenService
     {
         private readonly IConfiguration _configuration;
 
-        public TokenService(IConfiguration configuration)
-        {
-            _configuration = configuration;
-        }
+        public TokenService(IConfiguration configuration) => _configuration = configuration;
 
-        public string GerarToken(Usuario usuario)
+        public string GenerateToken(User usuario)
         {
             var tokenConfigurations = _configuration.GetSection("TokenConfiguration");
             var tokenKey = tokenConfigurations.GetSection("Key").Value;
@@ -34,8 +31,8 @@ namespace Universo.Paralello.Blog.Api.Services
             {
                 Subject = new ClaimsIdentity(new[]
                 {
-                    new Claim("Nome", usuario.Nome), 
-                    new Claim("Email", usuario.Conta.Email), 
+                    new Claim("Name", usuario.Name), 
+                    new Claim("Email", usuario.Account.Email), 
                     new Claim(ClaimTypes.Role, "Admin"), 
                 }),
                 Expires = DateTime.Now.AddHours(tokenTimeExpiration),

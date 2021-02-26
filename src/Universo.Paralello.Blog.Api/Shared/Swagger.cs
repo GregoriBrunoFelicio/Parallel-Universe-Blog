@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
 
-namespace Universo.Paralello.Blog.Api.Shared
+namespace Parallel.Universe.Blog.Api.Shared
 {
     public static class Swagger
     {

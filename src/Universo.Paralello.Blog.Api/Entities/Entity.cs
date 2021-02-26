@@ -1,5 +1,5 @@
 ﻿
-namespace Universo.Paralello.Blog.Api.Entities
+namespace Parallel.Universe.Blog.Api.Entities
 {
     public abstract class Entity
     {

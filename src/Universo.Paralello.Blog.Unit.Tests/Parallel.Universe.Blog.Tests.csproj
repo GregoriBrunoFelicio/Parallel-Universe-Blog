@@ -23,7 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Universo.Paralello.Blog.Api\Universo.Paralello.Blog.Api.csproj" />
+    <ProjectReference Include="..\Universo.Paralello.Blog.Api\Parallel.Universe.Blog.Api.csproj" />
   </ItemGroup>
 
 </Project>

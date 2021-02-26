@@ -1,20 +1,20 @@
-﻿namespace Universo.Paralello.Blog.Api.Services.Results
+﻿namespace Parallel.Universe.Blog.Api.Services.Results
 {
     public interface IResult
     {
-        string Mensagem { get; }
-        bool Sucesso { get; }
+        string Message { get; }
+        bool Success { get; }
     }
 
     public class Result : IResult
     {
-        public Result(string mensagem, bool sucesso)
+        public Result(string message, bool success)
         {
-            Mensagem = mensagem;
-            Sucesso = sucesso;
+            Message = message;
+            Success = success;
         }
 
-        public string Mensagem { get; }
-        public bool Sucesso { get; }
+        public string Message { get; }
+        public bool Success { get; }
     }
 }

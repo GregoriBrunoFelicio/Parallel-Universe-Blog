@@ -1,13 +1,13 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Universo.Paralello.Blog.Api.ViewModels
+namespace Parallel.Universe.Blog.Api.ViewModels
 {
     public class LoginViewModel
     {
-        [Required(ErrorMessage = "O E-mail deve ser informado.")]
+        [Required(ErrorMessage = "The E-mail is required.")]
         public string Email { get; set; }
 
-        [Required(ErrorMessage = "A Senha deve ser informada.")]
+        [Required(ErrorMessage = "The Password is required.")]
         public string Senha { get; set; }
     }
 }

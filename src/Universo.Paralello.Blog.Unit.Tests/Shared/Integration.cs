@@ -2,7 +2,7 @@
 using NUnit.Framework;
 using Xunit;
 
-namespace Universo.Paralello.Blog.Tests.Shared
+namespace Parallel.Universe.Blog.Tests.Shared
 {
     public class Integration : IClassFixture<CustomWebApplicationFactory>
     {

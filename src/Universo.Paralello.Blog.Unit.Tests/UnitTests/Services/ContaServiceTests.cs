@@ -4,183 +4,177 @@ using AutoMapper;
 using FluentAssertions;
 using Moq;
 using NUnit.Framework;
-using Universo.Paralello.Blog.Api.Data.Repositories;
-using Universo.Paralello.Blog.Api.Entities;
-using Universo.Paralello.Blog.Api.Services;
-using Universo.Paralello.Blog.Api.Services.Results;
-using Universo.Paralello.Blog.Api.ViewModels;
-using Universo.Paralello.Blog.Tests.Shared.Builders;
+using Parallel.Universe.Blog.Api.Data.Repositories;
+using Parallel.Universe.Blog.Api.Entities;
+using Parallel.Universe.Blog.Api.Services;
+using Parallel.Universe.Blog.Api.Services.Results;
+using Parallel.Universe.Blog.Api.ViewModels;
+using Parallel.Universe.Blog.Tests.Shared.Builders;
 
-namespace Universo.Paralello.Blog.Tests.UnitTests.Services
+namespace Parallel.Universe.Blog.Tests.UnitTests.Services
 {
-    public class ContaServiceTests
+    public class AccountServiceTests
     {
-        protected Mock<IUsuarioRepository> UsuarioRepositoryMock;
-        protected Mock<IContaRepository> ContaRepositoryMock;
+        protected Mock<IUserRepository> UserRepositoryMock;
+        protected Mock<IAccountRepository> AccountRepositoryMock;
         protected Mock<ITokenService> TokenServiceMock;
         protected Mock<IMapper> MapperMock;
-        protected IContaService ContaService;
-        protected UsuarioBuilder UsuarioBuilder;
-        protected ContaBuilder ContaBuilder;
-        protected UsuarioViewModelBuilder UsuarioViewModelBuilder;
-        protected ContaViewModelBuilder ContaViewModelBuilder;
+        protected IAccountService AccountService;
+        protected UsuarioBuilder UserBuilder;
+        protected AccountBuilder AccountBuilder;
+        protected UserViewModelBuilder UserViewModelBuilder;
+        protected AccountViewModelBuilder AccountViewModelBuilder;
 
         [OneTimeSetUp]
         public void SetUp()
         {
-            UsuarioRepositoryMock = new Mock<IUsuarioRepository>();
-            ContaRepositoryMock = new Mock<IContaRepository>();
+            UserRepositoryMock = new Mock<IUserRepository>();
+            AccountRepositoryMock = new Mock<IAccountRepository>();
             TokenServiceMock = new Mock<ITokenService>();
             MapperMock = new Mock<IMapper>();
 
-            UsuarioBuilder = new UsuarioBuilder();
-            ContaBuilder = new ContaBuilder();
-            UsuarioViewModelBuilder = new UsuarioViewModelBuilder();
-            ContaViewModelBuilder = new ContaViewModelBuilder();
+            UserBuilder = new UsuarioBuilder();
+            AccountBuilder = new AccountBuilder();
+            UserViewModelBuilder = new UserViewModelBuilder();
+            AccountViewModelBuilder = new AccountViewModelBuilder();
 
-            ContaService = new ContaService(
-                UsuarioRepositoryMock.Object,
-                ContaRepositoryMock.Object,
+            AccountService = new AccountService(
+                UserRepositoryMock.Object,
+                AccountRepositoryMock.Object,
                 TokenServiceMock.Object,
                 MapperMock.Object);
         }
     }
 
-    public class CriarTests : ContaServiceTests
+    public class CreateTests : AccountServiceTests
     {
-        private IResult _resultado;
+        private IResult _result;
 
         [OneTimeSetUp]
         public new async Task SetUp()
         {
-            var model = UsuarioViewModelBuilder.WithConta().Generate();
-            var usuario = UsuarioBuilder.Generate();
-
-            MapperMock.Setup(x => x.Map<UsuarioViewModel, Usuario>(model)).Returns(usuario);
-            _resultado = await ContaService.Criar(model);
+            var model = UserViewModelBuilder.WithAccount().Generate();
+            var user = UserBuilder.Generate();
+            MapperMock.Setup(x => x.Map<UserViewModel, User>(model)).Returns(user);
+            _result = await AccountService.Create(model);
         }
 
         [Test]
-        public void DeveChamarMetodoGetByEmailAsync() => ContaRepositoryMock.Verify(x => x.GetByEmailAsync(It.IsAny<string>()), Times.Once);
+        public void ShouldCallMethodGetByEmailAsync() => AccountRepositoryMock.Verify(x => x.GetByEmailAsync(It.IsAny<string>()), Times.Once);
 
         [Test]
-        public void DeveChamarOMetodoDeMap() =>
-            MapperMock.Verify(x => x.Map<UsuarioViewModel, Usuario>(It.IsAny<UsuarioViewModel>()), Times.Once);
+        public void ShouldCallMethodMap() =>
+            MapperMock.Verify(x => x.Map<UserViewModel, User>(It.IsAny<UserViewModel>()), Times.Once);
 
         [Test]
-        public void DeveChamarMetodoAddAsync() => UsuarioRepositoryMock.Verify(x => x.AddAsync(It.IsAny<Usuario>()), Times.Once);
+        public void ShouldCallMethodAddAsync() => UserRepositoryMock.Verify(x => x.AddAsync(It.IsAny<User>()), Times.Once);
 
         [Test]
-        public void OResultadoDeveRetonarAMensagemCorreta() =>
-            _resultado.Mensagem.Should().Be("Usuário criado com sucesso.");
+        public void ShouldReturnTheCorrectMessage() =>
+            _result.Message.Should().Be("User created successfully.");
 
         [Test]
-        public void OResultadoDeveRetornarSucessoVerdadeiro() => _resultado.Sucesso.Should().BeTrue();
+        public void OResultadoDeveRetornarSucessoVerdadeiro() => _result.Success.Should().BeTrue();
     }
 
-    public class CriarComEmailJaCadastradoTests : ContaServiceTests
+    public class CreateWhenEmailIsAlreadyRegistered : AccountServiceTests
     {
-        private IResult _resultado;
+        private IResult _result;
 
         [OneTimeSetUp]
         public new async Task SetUp()
         {
-            var model = UsuarioViewModelBuilder.WithConta().Generate();
-            ContaRepositoryMock.Setup(x => x.GetByEmailAsync(It.IsAny<string>())).ReturnsAsync(new Conta());
-            _resultado = await ContaService.Criar(model);
+            var model = UserViewModelBuilder.WithAccount().Generate();
+            AccountRepositoryMock.Setup(x => x.GetByEmailAsync(It.IsAny<string>())).ReturnsAsync(new Account());
+            _result = await AccountService.Create(model);
         }
 
         [Test]
-        public void DeveRetonarMensagemCorretaQuandoOEmailJaEstaEmUso() => _resultado.Mensagem.Should().Be("Email já cadastrado.");
+        public void ShouldReturnTheCorrectMessage() => _result.Message.Should().Be("E-mail already registred.");
 
         [Test]
-        public void OResultadoDeveRetornarSucessoComoFalso() => _resultado.Sucesso.Should().BeFalse();
+        public void ShouldReturnFalse() => _result.Success.Should().BeFalse();
     }
 
-    public class AutenticarTests : ContaServiceTests
+    public class VerifyTests : AccountServiceTests
     {
-        private IUsuarioLoginResult _resultado;
+        private IUserLoginResult _result;
         private LoginViewModel _model;
 
         [OneTimeSetUp]
         public new async Task SetUp()
         {
-            var conta = ContaBuilder.Generate();
-            _model = new LoginViewModel();
-
-            _model.Senha = conta.Senha.Valor;
-            conta.Senha.Criptografar();
-
-            ContaRepositoryMock.Setup(x => x.GetByEmailAsync(_model.Email)).ReturnsAsync(conta);
-            TokenServiceMock.Setup(x => x.GerarToken(It.IsAny<Usuario>())).Returns("token");
-            _resultado = await ContaService.Autenticar(_model);
+            var account = AccountBuilder.Generate();
+            _model = new LoginViewModel { Senha = account.Password.Value };
+            account.Password.Encrypt();
+            AccountRepositoryMock.Setup(x => x.GetByEmailAsync(_model.Email)).ReturnsAsync(account);
+            TokenServiceMock.Setup(x => x.GenerateToken(It.IsAny<User>())).Returns("token");
+            _result = await AccountService.Verify(_model);
         }
 
         [Test]
-        public void DeveChamarMetodoGetByEmail() =>
-            ContaRepositoryMock.Verify(x => x.GetByEmailAsync(_model.Email), Times.Once);
+        public void ShouldCallMethodGetByEmailAsync() =>
+            AccountRepositoryMock.Verify(x => x.GetByEmailAsync(_model.Email), Times.Once);
 
         [Test]
-        public void DeveChamarMetodoGetById() =>
-            UsuarioRepositoryMock.Verify(x => x.GetByIdAsync(It.IsAny<int>()), Times.Once);
+        public void ShouldCallMethodGetByIdAsync() =>
+            UserRepositoryMock.Verify(x => x.GetByIdAsync(It.IsAny<int>()), Times.Once);
 
         [Test]
-        public void DeveChamarMetodoGerarToken() =>
-                   TokenServiceMock.Verify(x => x.GerarToken(It.IsAny<Usuario>()), Times.Once);
+        public void ShouldCallMethodGenerateToken() =>
+                   TokenServiceMock.Verify(x => x.GenerateToken(It.IsAny<User>()), Times.Once);
 
         [Test]
-        public void DeveRetornarMensagemDeSucesso() => _resultado.Mensagem.Should().Be("Login realizado com sucesso.");
+        public void ShouldReturnTheCorrectMessage() => _result.Message.Should().Be("Login successfully.");
 
         [Test]
-        public void OResultadoDeveRetonarVerdadeiro() => _resultado.Sucesso.Should().BeTrue();
+        public void ShouldReturnTrue() => _result.Success.Should().BeTrue();
 
         [Test]
-        public void DeveRetornarUmToken() => _resultado.Token.Should().NotBeEmpty();
+        public void TheTokenShouldNotBeNull() => _result.Token.Should().NotBeEmpty();
     }
 
-    public class AutenticarQuandoContaNaoExisteTests : ContaServiceTests
+    public class VerifyWhenAccountIsNotFound : AccountServiceTests
     {
-        private IUsuarioLoginResult _resultado;
+        private IUserLoginResult _result;
         private LoginViewModel _model;
 
         [OneTimeSetUp]
         public new async Task SetUp()
         {
             _model = new AutoFaker<LoginViewModel>().Generate();
-            ContaRepositoryMock.Setup(x => x.GetByEmailAsync(_model.Email)).ReturnsAsync(value: null);
-            _resultado = await ContaService.Autenticar(_model);
+            AccountRepositoryMock.Setup(x => x.GetByEmailAsync(_model.Email)).ReturnsAsync(value: null);
+            _result = await AccountService.Verify(_model);
         }
 
         [Test]
-        public void DeveChamarMetodoGetByEmail() =>
-                ContaRepositoryMock.Verify(x => x.GetByEmailAsync(_model.Email), Times.Once);
+        public void ShouldCallMethodGetByEmailAsync() =>
+                AccountRepositoryMock.Verify(x => x.GetByEmailAsync(_model.Email), Times.Once);
 
         [Test]
-        public void DeveRetornarMensagemDeEmailOuSenhaInvalidos() => _resultado.Mensagem.Should().Be("Email ou senha inválidos.");
+        public void ShouldReturnTheCorrectMessage() => _result.Message.Should().Be("Invalid email or password.");
     }
 
-    public class AutenticarQuandoSenhaNaoEValidaTests : ContaServiceTests
+    public class VerifyWhenPasswordIsInvalid : AccountServiceTests
     {
-        private IUsuarioLoginResult _resultado;
+        private IUserLoginResult _result;
         private LoginViewModel _model;
 
         [OneTimeSetUp]
         public new async Task SetUp()
         {
-            var conta = ContaBuilder.Generate();
+            var account = AccountBuilder.Generate();
             _model = new AutoFaker<LoginViewModel>().Generate();
-
-            conta.Senha.Criptografar();
-
-            ContaRepositoryMock.Setup(x => x.GetByEmailAsync(_model.Email)).ReturnsAsync(conta);
-            _resultado = await ContaService.Autenticar(_model);
+            account.Password.Encrypt();
+            AccountRepositoryMock.Setup(x => x.GetByEmailAsync(_model.Email)).ReturnsAsync(account);
+            _result = await AccountService.Verify(_model);
         }
 
         [Test]
-        public void DeveChamarMetodoGetByEmail() =>
-            ContaRepositoryMock.Verify(x => x.GetByEmailAsync(_model.Email), Times.Once);
+        public void ShouldCallMethodGetByEmailAsync() =>
+            AccountRepositoryMock.Verify(x => x.GetByEmailAsync(_model.Email), Times.Once);
 
         [Test]
-        public void DeveRetornarMensagemDeEmailOuSenhaInvalidos() => _resultado.Mensagem.Should().Be("Email ou senha inválidos.");
+        public void ShouldReturnTheCorrectMessage() => _result.Message.Should().Be("Invalid email or password.");
     }
 }

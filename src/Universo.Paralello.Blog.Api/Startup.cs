@@ -1,20 +1,13 @@
-using System.Text;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Internal;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.IdentityModel.Tokens;
-using Microsoft.OpenApi.Models;
-using Universo.Paralello.Blog.Api.Data;
-using Universo.Paralello.Blog.Api.Data.Repositories;
-using Universo.Paralello.Blog.Api.Services;
-using Universo.Paralello.Blog.Api.Shared;
+using Parallel.Universe.Blog.Api.Data;
+using Parallel.Universe.Blog.Api.Shared;
 
-namespace Universo.Paralello.Blog.Api
+namespace Parallel.Universe.Blog.Api
 {
     public class Startup
     {
@@ -30,7 +23,7 @@ namespace Universo.Paralello.Blog.Api
             services.AddControllers().ConfigureApiBehaviorOptions(options => options.SuppressModelStateInvalidFilter = true);
             services.AddAutoMapper(typeof(Startup));
 
-            services.AddDbContext<UniversoParalelloBlogContext>(x =>
+            services.AddDbContext<ParallelUniverseBlogContext>(x =>
                 x.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"))
                     .UseLazyLoadingProxies()); ;
 

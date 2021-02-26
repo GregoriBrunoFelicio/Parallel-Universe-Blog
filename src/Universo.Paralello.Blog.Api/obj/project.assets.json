@@ -7710,9 +7710,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\GregoriBrunoFelicio\\Desktop\\Repositories\\Universo.Paralello.Blog\\src\\Universo.Paralello.Blog.Api\\Universo.Paralello.Blog.Api.csproj",
-      "projectName": "Universo.Paralello.Blog.Api",
-      "projectPath": "C:\\Users\\GregoriBrunoFelicio\\Desktop\\Repositories\\Universo.Paralello.Blog\\src\\Universo.Paralello.Blog.Api\\Universo.Paralello.Blog.Api.csproj",
+      "projectUniqueName": "C:\\Users\\GregoriBrunoFelicio\\Desktop\\Repositories\\Universo.Paralello.Blog\\src\\Universo.Paralello.Blog.Api\\Parallel.Universe.Blog.Api.csproj",
+      "projectName": "Parallel.Universe.Blog.Api",
+      "projectPath": "C:\\Users\\GregoriBrunoFelicio\\Desktop\\Repositories\\Universo.Paralello.Blog\\src\\Universo.Paralello.Blog.Api\\Parallel.Universe.Blog.Api.csproj",
       "packagesPath": "C:\\Users\\GregoriBrunoFelicio\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\GregoriBrunoFelicio\\Desktop\\Repositories\\Universo.Paralello.Blog\\src\\Universo.Paralello.Blog.Api\\obj\\",
       "projectStyle": "PackageReference",

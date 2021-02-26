@@ -2,10 +2,10 @@
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using Universo.Paralello.Blog.Api;
-using Universo.Paralello.Blog.Api.Data;
+using Parallel.Universe.Blog.Api;
+using Parallel.Universe.Blog.Api.Data;
 
-namespace Universo.Paralello.Blog.Tests.Shared
+namespace Parallel.Universe.Blog.Tests.Shared
 {
     public class CustomWebApplicationFactory : WebApplicationFactory<Startup>
     {
@@ -17,18 +17,17 @@ namespace Universo.Paralello.Blog.Tests.Shared
                     .AddEntityFrameworkInMemoryDatabase()
                     .BuildServiceProvider();
 
-                services.AddDbContext<UniversoParalelloBlogContext>(configuracao =>
+                services.AddDbContext<ParallelUniverseBlogContext>(configuracao =>
                 {
                     configuracao.UseInMemoryDatabase("TestsDb");
                     configuracao.UseInternalServiceProvider(serviceProvider);
-
                 });
 
                 var sp = services.BuildServiceProvider();
 
                 using var scope = sp.CreateScope();
                 var scopedServices = scope.ServiceProvider;
-                var appDb = scopedServices.GetRequiredService<UniversoParalelloBlogContext>();
+                var appDb = scopedServices.GetRequiredService<ParallelUniverseBlogContext>();
                 appDb.Database.EnsureCreated();
             });
         }

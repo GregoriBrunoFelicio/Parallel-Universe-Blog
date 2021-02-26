@@ -1,14 +1,14 @@
 ﻿using Bogus;
-using Universo.Paralello.Blog.Api.ViewModels;
+using Parallel.Universe.Blog.Api.ViewModels;
 
-namespace Universo.Paralello.Blog.Tests.Shared.Builders
+namespace Parallel.Universe.Blog.Tests.Shared.Builders
 {
-    public sealed class ContaViewModelBuilder: Faker<ContaViewModel>
+    public sealed class AccountViewModelBuilder: Faker<AccountViewModel>
     {
-        public ContaViewModelBuilder() =>
+        public AccountViewModelBuilder() =>
             RuleFor(f => f.Id, () => 0)
                 .RuleFor(f => f.Email, f => f.Internet.Email())
-                .RuleFor(f => f.Senha, f => f.Internet.Password())
-                .RuleFor(f => f.SenhaConfirmacao, f => f.Internet.Password());
+                .RuleFor(f => f.Password, f => f.Internet.Password())
+                .RuleFor(f => f.PasswordConfirmation, f => f.Internet.Password());
     }
 }

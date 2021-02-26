@@ -1,9 +1,8 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.VisualBasic;
-using Universo.Paralello.Blog.Api.Entities;
+using Parallel.Universe.Blog.Api.Entities;
 
-namespace Universo.Paralello.Blog.Api.Data.Repositories
+namespace Parallel.Universe.Blog.Api.Data.Repositories
 {
     public interface IRepository<T>
     {
@@ -14,10 +13,10 @@ namespace Universo.Paralello.Blog.Api.Data.Repositories
 
     public class Repository<T> : IRepository<T> where T : Entity
     {
-        protected UniversoParalelloBlogContext Context;
+        protected ParallelUniverseBlogContext Context;
         private readonly DbSet<T> _dbSet;
 
-        public Repository(UniversoParalelloBlogContext context)
+        public Repository(ParallelUniverseBlogContext context)
         {
             Context = context;
             _dbSet = Context.Set<T>();

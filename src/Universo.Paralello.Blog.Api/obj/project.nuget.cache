@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "r/st2zRF1Bs5HkTiX2ndyCyHd5To8p8R7QIaNPmZI2j5gXxHqwDWm05ZVOxbT1BFzjbMCIjQCgM2qDJMQQO5rQ==",
+  "dgSpecHash": "wrTkdwkfDYP16IPuM85U7BTj4xlnr0Fe0OR+lQRxHSVBsLf2k79g6el6AEW7Qcl25qxT8M6srK5/YWP3MQyhVg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\GregoriBrunoFelicio\\Desktop\\Repositories\\Universo.Paralello.Blog\\src\\Universo.Paralello.Blog.Api\\Universo.Paralello.Blog.Api.csproj",
+  "projectFilePath": "C:\\Users\\GregoriBrunoFelicio\\Desktop\\Repositories\\Universo.Paralello.Blog\\src\\Universo.Paralello.Blog.Api\\Parallel.Universe.Blog.Api.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\GregoriBrunoFelicio\\.nuget\\packages\\automapper\\10.1.1\\automapper.10.1.1.nupkg.sha512",
     "C:\\Users\\GregoriBrunoFelicio\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\8.1.1\\automapper.extensions.microsoft.dependencyinjection.8.1.1.nupkg.sha512",
