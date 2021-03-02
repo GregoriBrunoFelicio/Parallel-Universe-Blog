@@ -9,8 +9,8 @@ using Parallel.Universe.Blog.Api.Data;
 namespace Parallel.Universe.Blog.Api.Migrations
 {
     [DbContext(typeof(ParallelUniverseBlogContext))]
-    [Migration("20210225235832_Initial")]
-    partial class Initial
+    [Migration("20210302002638_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -53,6 +53,9 @@ namespace Parallel.Universe.Blog.Api.Migrations
                     b.Property<string>("About")
                         .HasMaxLength(500)
                         .HasColumnType("varchar(500)");
+
+                    b.Property<bool>("Active")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Name")
                         .IsRequired()

@@ -1,13 +1,13 @@
 ﻿namespace Parallel.Universe.Blog.Api.Services.Results
 {
-    public interface IUserLoginResult : IResult
+    public interface ILoginResult : IResult
     {
         string Token { get; }
     }
 
-    public class UserLoginResult : IUserLoginResult
+    public class LoginResult : ILoginResult
     {
-        public UserLoginResult(string mensagem, bool sucesso, string token = "")
+        public LoginResult(string mensagem, bool sucesso, string token = "")
         {
             Message = mensagem;
             Success = sucesso;

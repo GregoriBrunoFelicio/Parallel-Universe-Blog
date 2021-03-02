@@ -14,5 +14,7 @@ namespace Parallel.Universe.Blog.Api.ViewModels
         public string About { get; set; }
 
         public AccountViewModel Account { get; set; }
+
+        public bool Active { get; set; }
     }
 }

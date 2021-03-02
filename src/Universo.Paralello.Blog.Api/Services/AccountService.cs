@@ -10,7 +10,7 @@ namespace Parallel.Universe.Blog.Api.Services
     public interface IAccountService
     {
         Task<IResult> Create(UserViewModel model);
-        Task<IUserLoginResult> Verify(LoginViewModel model);
+        Task<ILoginResult> Verify(LoginViewModel model);
     }
 
     public class AccountService : IAccountService
@@ -41,20 +41,22 @@ namespace Parallel.Universe.Blog.Api.Services
             return new Result("User created successfully.", true);
         }
 
-        public async Task<IUserLoginResult> Verify(LoginViewModel model)
+        public async Task<ILoginResult> Verify(LoginViewModel model)
         {
             var account = await _accountRepository.GetByEmailAsync(model.Email);
 
             if (account == null)
-                return new UserLoginResult("Invalid email or password.", false);
+                return new LoginResult("Invalid email or password.", false);
 
             if (!account.Password.VerifyPassword(model.Senha))
-                return new UserLoginResult("Invalid email or password.", false);
+                return new LoginResult("Invalid email or password.", false);
 
-            var user = await _userRepository.GetByIdAsync(account.UserId);
-            var token = _tokenService.GenerateToken(user);
+            if (!account.User.Active)
+                return new LoginResult("Invalid email or password.", false);
 
-            return new UserLoginResult("Login successfully.", true, token);
+            var token = _tokenService.GenerateToken(account.User);
+
+            return new LoginResult("Login successfully.", true, token);
         }
 
         private async Task<bool> EmailAlreadyRegistred(string email) =>

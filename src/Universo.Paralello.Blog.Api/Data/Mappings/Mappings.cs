@@ -12,6 +12,7 @@ namespace Parallel.Universe.Blog.Api.Data.Mappings
             builder.Property(x => x.Name).HasColumnType("varchar").IsRequired().HasMaxLength(50);
             builder.Property(x => x.About).HasColumnType("varchar").HasMaxLength(500);
             builder.HasOne(x => x.Account).WithOne(x => x.User).HasForeignKey<Account>(x => x.UserId).IsRequired();
+            builder.Property(x => x.Active).HasColumnType("bit").IsRequired();
         }
     }
 

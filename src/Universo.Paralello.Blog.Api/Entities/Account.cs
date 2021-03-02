@@ -16,7 +16,6 @@ namespace Parallel.Universe.Blog.Api.Entities
         public string Email { get; }
         public Password Password { get; }
         public int UserId { get; }
-        public virtual User User { get; }
-
+        public virtual User User { get; set; }
     }
 }

@@ -15,6 +15,8 @@ namespace Parallel.Universe.Blog.Api.Data.Repositories
         {
         }
 
-        public async Task<Account> GetByEmailAsync(string email) => await Context.Set<Account>().SingleOrDefaultAsync(x => x.Email == email);
+        public async Task<Account> GetByEmailAsync(string email) => 
+                await Context.Set<Account>()
+                    .SingleOrDefaultAsync(x => x.Email == email);
     }
 }

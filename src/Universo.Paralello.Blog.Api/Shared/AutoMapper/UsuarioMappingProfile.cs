@@ -9,6 +9,6 @@ namespace Parallel.Universe.Blog.Api.Shared.AutoMapper
     {
         public UserMappingProfile() =>
             CreateMap<UserViewModel, User>().ConstructUsing(x =>
-                new User(x.Id, x.Name, new Account(x.Account.Id, x.Account.Email, new Password(x.Account.Email))));
+                new User(x.Id, x.Name, new Account(x.Account.Id, x.Account.Email, new Password(x.Account.Email)), x.Active));
     }
 }

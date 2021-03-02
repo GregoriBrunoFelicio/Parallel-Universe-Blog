@@ -20,7 +20,7 @@ namespace Parallel.Universe.Blog.Tests.UnitTests.Services
         protected Mock<ITokenService> TokenServiceMock;
         protected Mock<IMapper> MapperMock;
         protected IAccountService AccountService;
-        protected UsuarioBuilder UserBuilder;
+        protected UserBuilder UserBuilder;
         protected AccountBuilder AccountBuilder;
         protected UserViewModelBuilder UserViewModelBuilder;
         protected AccountViewModelBuilder AccountViewModelBuilder;
@@ -33,7 +33,7 @@ namespace Parallel.Universe.Blog.Tests.UnitTests.Services
             TokenServiceMock = new Mock<ITokenService>();
             MapperMock = new Mock<IMapper>();
 
-            UserBuilder = new UsuarioBuilder();
+            UserBuilder = new UserBuilder();
             AccountBuilder = new AccountBuilder();
             UserViewModelBuilder = new UserViewModelBuilder();
             AccountViewModelBuilder = new AccountViewModelBuilder();
@@ -98,27 +98,27 @@ namespace Parallel.Universe.Blog.Tests.UnitTests.Services
 
     public class VerifyTests : AccountServiceTests
     {
-        private IUserLoginResult _result;
+        private ILoginResult _result;
         private LoginViewModel _model;
 
         [OneTimeSetUp]
         public new async Task SetUp()
         {
             var account = AccountBuilder.Generate();
+            account.User = UserBuilder.WithActive(true).Generate();
             _model = new LoginViewModel { Senha = account.Password.Value };
+
             account.Password.Encrypt();
+
             AccountRepositoryMock.Setup(x => x.GetByEmailAsync(_model.Email)).ReturnsAsync(account);
             TokenServiceMock.Setup(x => x.GenerateToken(It.IsAny<User>())).Returns("token");
+
             _result = await AccountService.Verify(_model);
         }
 
         [Test]
         public void ShouldCallMethodGetByEmailAsync() =>
             AccountRepositoryMock.Verify(x => x.GetByEmailAsync(_model.Email), Times.Once);
-
-        [Test]
-        public void ShouldCallMethodGetByIdAsync() =>
-            UserRepositoryMock.Verify(x => x.GetByIdAsync(It.IsAny<int>()), Times.Once);
 
         [Test]
         public void ShouldCallMethodGenerateToken() =>
@@ -136,7 +136,7 @@ namespace Parallel.Universe.Blog.Tests.UnitTests.Services
 
     public class VerifyWhenAccountIsNotFound : AccountServiceTests
     {
-        private IUserLoginResult _result;
+        private ILoginResult _result;
         private LoginViewModel _model;
 
         [OneTimeSetUp]
@@ -157,7 +157,7 @@ namespace Parallel.Universe.Blog.Tests.UnitTests.Services
 
     public class VerifyWhenPasswordIsInvalid : AccountServiceTests
     {
-        private IUserLoginResult _result;
+        private ILoginResult _result;
         private LoginViewModel _model;
 
         [OneTimeSetUp]

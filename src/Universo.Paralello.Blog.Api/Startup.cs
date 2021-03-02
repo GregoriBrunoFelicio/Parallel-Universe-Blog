@@ -25,7 +25,7 @@ namespace Parallel.Universe.Blog.Api
 
             services.AddDbContext<ParallelUniverseBlogContext>(x =>
                 x.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"))
-                    .UseLazyLoadingProxies()); ;
+                    .UseLazyLoadingProxies()); 
 
             Swagger.Configure(services);
             Ioc.RegisterServices(services);
@@ -38,7 +38,7 @@ namespace Parallel.Universe.Blog.Api
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Universo.Paralello.Blog.Api v1"));
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Parallel.Universe.Blog.Api v1"));
             }
 
             app.UseHttpsRedirection();
