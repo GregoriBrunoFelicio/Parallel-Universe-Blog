@@ -22,7 +22,6 @@
 
   <ItemGroup>
     <Folder Include="Data\Scripts\" />
-    <Folder Include="Data\Migrations\" />
   </ItemGroup>
 
 </Project>

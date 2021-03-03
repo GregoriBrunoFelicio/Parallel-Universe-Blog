@@ -8,7 +8,7 @@ namespace Parallel.Universe.Blog.Tests.Shared.Builders
         public UserBuilder() =>
             CustomInstantiator(f =>
                 new User(
-                    f.Random.Int(1, 100),
+                    0,
                     f.Random.Word(),
                     new AccountBuilder(), f.Random.Bool()));
 

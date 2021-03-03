@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Parallel.Universe.Blog.Api.Configurations;
 using Parallel.Universe.Blog.Api.Data;
 using Parallel.Universe.Blog.Api.Shared;
 

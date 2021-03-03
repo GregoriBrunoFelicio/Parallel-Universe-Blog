@@ -24,7 +24,6 @@ namespace Parallel.Universe.Blog.Tests.Shared
                 });
 
                 var sp = services.BuildServiceProvider();
-
                 using var scope = sp.CreateScope();
                 var scopedServices = scope.ServiceProvider;
                 var appDb = scopedServices.GetRequiredService<ParallelUniverseBlogContext>();
