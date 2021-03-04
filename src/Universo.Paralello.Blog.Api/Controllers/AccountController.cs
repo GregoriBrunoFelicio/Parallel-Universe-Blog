@@ -1,7 +1,7 @@
-﻿using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Parallel.Universe.Blog.Api.Services;
 using Parallel.Universe.Blog.Api.ViewModels;
+using System.Threading.Tasks;
 
 namespace Parallel.Universe.Blog.Api.Controllers
 {
@@ -19,7 +19,7 @@ namespace Parallel.Universe.Blog.Api.Controllers
         {
             var result = await _accountService.Create(model);
             return !result.Success
-                ? (IActionResult) BadRequest(result.Message) 
+                ? (IActionResult)BadRequest(result.Message)
                 : Ok(result.Message);
         }
 
@@ -27,8 +27,8 @@ namespace Parallel.Universe.Blog.Api.Controllers
         public async Task<IActionResult> Login([FromBody] LoginViewModel model)
         {
             var result = await _accountService.Verify(model);
-            return !result.Success 
-                ? (IActionResult) BadRequest(result.Message)
+            return !result.Success
+                ? (IActionResult)BadRequest(result.Message)
                 : Ok(result);
         }
     }

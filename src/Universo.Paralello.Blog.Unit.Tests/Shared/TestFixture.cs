@@ -1,14 +1,14 @@
-﻿using System.Net.Http;
-using Microsoft.AspNetCore.DataProtection;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Authorization.Policy;
+using Microsoft.AspNetCore.TestHost;
 using Microsoft.Extensions.DependencyInjection;
 using NUnit.Framework;
 using Parallel.Universe.Blog.Api.Data;
+using System.Net.Http;
 using Xunit;
 
 namespace Parallel.Universe.Blog.Tests.Shared
 {
-    public class Integration : IClassFixture<CustomWebApplicationFactory>
+    public class TestFixture : IClassFixture<BaseIntegrationTest>
     {
         protected HttpClient Client;
         protected ParallelUniverseBlogContext Context;
@@ -16,9 +16,9 @@ namespace Parallel.Universe.Blog.Tests.Shared
         [OneTimeSetUp]
         public void SetUp()
         {
-            var factory = new CustomWebApplicationFactory();
-            Client = factory.CreateClient();
+            var factory = new BaseIntegrationTest();
             Context = factory.Services.CreateScope().ServiceProvider.GetService<ParallelUniverseBlogContext>();
+            Client = factory.WithWebHostBuilder(builder => builder.ConfigureTestServices(services => services.AddSingleton<IPolicyEvaluator, FakePolicyEvaluator>())).CreateClient();
         }
     }
 }

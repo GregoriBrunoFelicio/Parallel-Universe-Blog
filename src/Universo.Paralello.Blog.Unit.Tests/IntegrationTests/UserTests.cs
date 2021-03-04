@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Parallel.Universe.Blog.Tests.IntegrationTests
 {
-    public class AccountTests : TestFixture
+    public class UserTests : TestFixture
     {
         protected UserViewModelBuilder UserViewModelBuilder;
         protected UserBuilder UserBuilder;
@@ -19,33 +19,25 @@ namespace Parallel.Universe.Blog.Tests.IntegrationTests
         [OneTimeSetUp]
         public new void SetUp()
         {
-
             UserViewModelBuilder = new UserViewModelBuilder();
             UserBuilder = new UserBuilder();
             userRepository = new UserRepository(Context);
-
         }
     }
 
-    public class CreateTests : AccountTests
+    public class UpdateTests : UserTests
     {
-
         [Test]
         public async Task ShouldReturnOk()
         {
-            var model = UserViewModelBuilder.WithAccount().Generate();
-            var response = await Client.PostAsJsonAsync("Account/Create", model);
-            response.StatusCode.Should().Be(HttpStatusCode.OK);
-        }
-
-
-        [Test]
-        public async Task ShouldReturnBadRequest()
-        {
             var user = UserBuilder.Generate();
+
+            await userRepository.AddAsync(user);
+            await Context.SaveChangesAsync();
 
             var model = new UserViewModel
             {
+                Id = user.Id,
                 Name = user.Name,
                 Active = true,
                 Account = new AccountViewModel
@@ -56,37 +48,11 @@ namespace Parallel.Universe.Blog.Tests.IntegrationTests
                 }
             };
 
-            await userRepository.AddAsync(user);
-            await Context.SaveChangesAsync();
+            model.Name = "New name";
 
-            var response = await Client.PostAsJsonAsync("Account/Create", model);
-            response.StatusCode.Should().Be(HttpStatusCode.BadRequest);
-        }
-    }
-
-    public class LoginTests : AccountTests
-    {
-
-        [Test]
-        public async Task ShouldReturnOk()
-        {
-            var user = new UserBuilder().WithActive(true).Generate();
-
-            var password = user.Account.Password.Value;
-
-            user.Account.Password.Encrypt();
-
-            await userRepository.AddAsync(user);
-            await Context.SaveChangesAsync();
-
-            var model = new LoginViewModel
-            {
-                Email = user.Account.Email,
-                Senha = password
-            };
-
-            var response = await Client.PostAsJsonAsync("Account/Login", model);
+            var response = await Client.PutAsJsonAsync("User", model);
             response.StatusCode.Should().Be(HttpStatusCode.OK);
         }
     }
+
 }
