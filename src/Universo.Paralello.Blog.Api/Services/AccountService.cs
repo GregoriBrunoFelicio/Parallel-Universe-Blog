@@ -1,9 +1,9 @@
-﻿using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using Parallel.Universe.Blog.Api.Data.Repositories;
 using Parallel.Universe.Blog.Api.Entities;
 using Parallel.Universe.Blog.Api.Services.Results;
 using Parallel.Universe.Blog.Api.ViewModels;
+using System.Threading.Tasks;
 
 namespace Parallel.Universe.Blog.Api.Services
 {
@@ -48,7 +48,7 @@ namespace Parallel.Universe.Blog.Api.Services
             if (account == null)
                 return new LoginResult("Invalid email or password.", false);
 
-            if (!account.Password.VerifyPassword(model.Senha))
+            if (!account.Password.VerifyPassword(model.Password))
                 return new LoginResult("Invalid email or password.", false);
 
             if (!account.User.Active)

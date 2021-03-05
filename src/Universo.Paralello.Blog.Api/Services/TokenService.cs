@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using Parallel.Universe.Blog.Api.Entities;
+using Parallel.Universe.Blog.Api.Enums;
 using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -33,7 +34,7 @@ namespace Parallel.Universe.Blog.Api.Services
                 {
                     new Claim("Name", user.Name),
                     new Claim("Email", user.Account.Email),
-                    new Claim(ClaimTypes.Role, "Admin"),
+                    new Claim(ClaimTypes.Role, Roles.Admin.ToString()),
                 }),
                 Expires = DateTime.Now.AddHours(tokenTimeExpiration),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)

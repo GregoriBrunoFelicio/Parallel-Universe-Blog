@@ -12,17 +12,32 @@ namespace Parallel.Universe.Blog.Api.Controllers
     [Route("[controller]")]
     public class UserController : ControllerBase
     {
-        private readonly IUserRepository _usuarioRepository;
+        private readonly IUserRepository _userRepository;
         private readonly IMapper _mapper;
 
-        public UserController(IUserRepository usuarioRepository, IMapper mapper)
+        public UserController(IUserRepository userRepository, IMapper mapper)
         {
-            _usuarioRepository = usuarioRepository;
+            _userRepository = userRepository;
             _mapper = mapper;
         }
 
         [HttpPut]
         [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> Post([FromBody] UserViewModel model) => Ok(await _usuarioRepository.UpdateAsync(_mapper.Map<UserViewModel, User>(model)));
+        public async Task<IActionResult> Put([FromBody] UserViewModel model)
+        {
+            var a = HttpContext.User.Claims;
+            return Ok(await _userRepository.UpdateAsync(_mapper.Map<UserViewModel, User>(model)));
+        }
+
+
+        [HttpPut("Inactivate/{id}")]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> Inactivate(int id)
+        {
+            var user = await _userRepository.GetByIdAsync(id);
+            if (user == null) return NotFound("User not found.");
+            user.Active = false;
+            return Ok(await _userRepository.UpdateAsync(user));
+        }
     }
 }

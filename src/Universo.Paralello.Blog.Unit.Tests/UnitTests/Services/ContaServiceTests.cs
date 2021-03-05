@@ -1,5 +1,4 @@
-﻿using System.Threading.Tasks;
-using AutoBogus;
+﻿using AutoBogus;
 using AutoMapper;
 using FluentAssertions;
 using Moq;
@@ -10,6 +9,7 @@ using Parallel.Universe.Blog.Api.Services;
 using Parallel.Universe.Blog.Api.Services.Results;
 using Parallel.Universe.Blog.Api.ViewModels;
 using Parallel.Universe.Blog.Tests.Shared.Builders;
+using System.Threading.Tasks;
 
 namespace Parallel.Universe.Blog.Tests.UnitTests.Services
 {
@@ -106,7 +106,7 @@ namespace Parallel.Universe.Blog.Tests.UnitTests.Services
         {
             var account = AccountBuilder.Generate();
             account.User = UserBuilder.WithActive(true).Generate();
-            _model = new LoginViewModel { Senha = account.Password.Value };
+            _model = new LoginViewModel { Password = account.Password.Value };
 
             account.Password.Encrypt();
 

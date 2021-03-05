@@ -1,4 +1,6 @@
-﻿namespace Parallel.Universe.Blog.Api.Entities
+﻿using System.Collections.Generic;
+
+namespace Parallel.Universe.Blog.Api.Entities
 {
     public class User : Entity
     {
@@ -21,7 +23,8 @@
 
         public string Name { get; }
         public string About { get; }
-        public virtual Account Account { get; }
         public bool Active { get; set; }
+        public virtual Account Account { get; }
+        public virtual ICollection<Post> Posts { get; }
     }
 }

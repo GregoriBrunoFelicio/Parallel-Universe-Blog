@@ -82,7 +82,7 @@ namespace Parallel.Universe.Blog.Tests.IntegrationTests
             var model = new LoginViewModel
             {
                 Email = user.Account.Email,
-                Senha = password
+                Password = password
             };
 
             var response = await Client.PostAsJsonAsync("Account/Login", model);
