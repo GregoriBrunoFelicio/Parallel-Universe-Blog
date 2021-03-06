@@ -8,7 +8,7 @@ using System.Net;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
 
-namespace Parallel.Universe.Blog.Tests.IntegrationTests
+namespace Parallel.Universe.Blog.Tests.Integration_Tests
 {
     public class AccountTests : TestFixture
     {

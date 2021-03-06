@@ -23,11 +23,7 @@ namespace Parallel.Universe.Blog.Api.Controllers
 
         [HttpPut]
         [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> Put([FromBody] UserViewModel model)
-        {
-            var a = HttpContext.User.Claims;
-            return Ok(await _userRepository.UpdateAsync(_mapper.Map<UserViewModel, User>(model)));
-        }
+        public async Task<IActionResult> Put([FromBody] UserViewModel model) => Ok(await _userRepository.UpdateAsync(_mapper.Map<UserViewModel, User>(model)));
 
 
         [HttpPut("Inactivate/{id}")]

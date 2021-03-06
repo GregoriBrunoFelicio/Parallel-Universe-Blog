@@ -11,7 +11,7 @@ using Parallel.Universe.Blog.Api.ViewModels;
 using Parallel.Universe.Blog.Tests.Shared.Builders;
 using System.Threading.Tasks;
 
-namespace Parallel.Universe.Blog.Tests.UnitTests.Services
+namespace Parallel.Universe.Blog.Tests.Unit_Tests.Services
 {
     public class AccountServiceTests
     {

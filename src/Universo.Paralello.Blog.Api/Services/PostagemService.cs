@@ -10,6 +10,7 @@ namespace Parallel.Universe.Blog.Api.Services
     public interface IPostService
     {
         Task<IResult> Create(PostViewModel model);
+        Task<IResult> Update(PostViewModel model);
     }
 
     public class PostService : IPostService
@@ -31,13 +32,31 @@ namespace Parallel.Universe.Blog.Api.Services
 
             var user = await _userRepository.GetByIdAsync(post.UserId);
 
-            if (user == null) return new Result("Use not found.", false);
+            if (user == null) return new Result("User not found.", false);
 
             if (!user.Active) return new Result("Inactive account.", false);
 
             await _postRepository.AddAsync(post);
 
             return new Result("Post created successfully", true);
+        }
+
+        public async Task<IResult> Update(PostViewModel model)
+        {
+            var post = mapper.Map<Post>(model);
+
+            var oldPost = await _postRepository.GetByIdAsync(model.Id);
+            var user = await _userRepository.GetByIdAsync(post.UserId);
+
+            if (user == null) return new Result("User not found.", false);
+
+            if (!user.Active) return new Result("Inactive account.", false);
+
+            if (oldPost.User.Id != post.UserId) return new Result("You could not edit this post.", false);
+
+            await _postRepository.UpdateAsync(post);
+
+            return new Result("Post updated successfully.", true);
         }
     }
 }

@@ -3,7 +3,7 @@ using FluentAssertions;
 using NUnit.Framework;
 using Parallel.Universe.Blog.Api.Shared.ValueObjects;
 
-namespace Parallel.Universe.Blog.Tests.UnitTests.ValueObjects
+namespace Parallel.Universe.Blog.Tests.Unit_Tests.ValueObjects
 {
     public class PaswordTests
     {
