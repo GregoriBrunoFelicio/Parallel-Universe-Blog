@@ -15,59 +15,59 @@ namespace Parallel.Universe.Blog.Tests.Unit_Tests.Services
 {
     public class AccountServiceTests
     {
-        protected Mock<IUserRepository> UserRepositoryMock;
-        protected Mock<IAccountRepository> AccountRepositoryMock;
-        protected Mock<ITokenService> TokenServiceMock;
-        protected Mock<IMapper> MapperMock;
-        protected IAccountService AccountService;
-        protected UserBuilder UserBuilder;
-        protected AccountBuilder AccountBuilder;
-        protected UserViewModelBuilder UserViewModelBuilder;
-        protected AccountViewModelBuilder AccountViewModelBuilder;
+        protected Mock<IUserRepository> userRepositoryMock;
+        protected Mock<IAccountRepository> accountRepositoryMock;
+        protected Mock<ITokenService> tokenServiceMock;
+        protected Mock<IMapper> mapperMock;
+        protected IAccountService accountService;
+        protected UserBuilder userBuilder;
+        protected AccountBuilder accountBuilder;
+        protected UserViewModelBuilder userViewModelBuilder;
+        protected AccountViewModelBuilder accountViewModelBuilder;
 
         [OneTimeSetUp]
         public void SetUp()
         {
-            UserRepositoryMock = new Mock<IUserRepository>();
-            AccountRepositoryMock = new Mock<IAccountRepository>();
-            TokenServiceMock = new Mock<ITokenService>();
-            MapperMock = new Mock<IMapper>();
+            userRepositoryMock = new Mock<IUserRepository>();
+            accountRepositoryMock = new Mock<IAccountRepository>();
+            tokenServiceMock = new Mock<ITokenService>();
+            mapperMock = new Mock<IMapper>();
 
-            UserBuilder = new UserBuilder();
-            AccountBuilder = new AccountBuilder();
-            UserViewModelBuilder = new UserViewModelBuilder();
-            AccountViewModelBuilder = new AccountViewModelBuilder();
+            userBuilder = new UserBuilder();
+            accountBuilder = new AccountBuilder();
+            userViewModelBuilder = new UserViewModelBuilder();
+            accountViewModelBuilder = new AccountViewModelBuilder();
 
-            AccountService = new AccountService(
-                UserRepositoryMock.Object,
-                AccountRepositoryMock.Object,
-                TokenServiceMock.Object,
-                MapperMock.Object);
+            accountService = new AccountService(
+                userRepositoryMock.Object,
+                accountRepositoryMock.Object,
+                tokenServiceMock.Object,
+                mapperMock.Object);
         }
     }
 
-    public class CreateTests : AccountServiceTests
+    public class AccountCreateTests : AccountServiceTests
     {
         private IResult _result;
 
         [OneTimeSetUp]
         public new async Task SetUp()
         {
-            var model = UserViewModelBuilder.WithAccount().Generate();
-            var user = UserBuilder.Generate();
-            MapperMock.Setup(x => x.Map<UserViewModel, User>(model)).Returns(user);
-            _result = await AccountService.Create(model);
+            var model = userViewModelBuilder.WithAccount().Generate();
+            var user = userBuilder.Generate();
+            mapperMock.Setup(x => x.Map<UserViewModel, User>(model)).Returns(user);
+            _result = await accountService.Create(model);
         }
 
         [Test]
-        public void ShouldCallMethodGetByEmailAsync() => AccountRepositoryMock.Verify(x => x.GetByEmailAsync(It.IsAny<string>()), Times.Once);
+        public void ShouldCallMethodGetByEmailAsync() => accountRepositoryMock.Verify(x => x.GetByEmailAsync(It.IsAny<string>()), Times.Once);
 
         [Test]
-        public void ShouldCallMethodMap() =>
-            MapperMock.Verify(x => x.Map<UserViewModel, User>(It.IsAny<UserViewModel>()), Times.Once);
+        public void ShouldCallMapper() =>
+            mapperMock.Verify(x => x.Map<UserViewModel, User>(It.IsAny<UserViewModel>()), Times.Once);
 
         [Test]
-        public void ShouldCallMethodAddAsync() => UserRepositoryMock.Verify(x => x.AddAsync(It.IsAny<User>()), Times.Once);
+        public void ShouldCallMethodAddAsync() => userRepositoryMock.Verify(x => x.AddAsync(It.IsAny<User>()), Times.Once);
 
         [Test]
         public void ShouldReturnTheCorrectMessage() =>
@@ -84,9 +84,9 @@ namespace Parallel.Universe.Blog.Tests.Unit_Tests.Services
         [OneTimeSetUp]
         public new async Task SetUp()
         {
-            var model = UserViewModelBuilder.WithAccount().Generate();
-            AccountRepositoryMock.Setup(x => x.GetByEmailAsync(It.IsAny<string>())).ReturnsAsync(new Account());
-            _result = await AccountService.Create(model);
+            var model = userViewModelBuilder.WithAccount().Generate();
+            accountRepositoryMock.Setup(x => x.GetByEmailAsync(It.IsAny<string>())).ReturnsAsync(new Account());
+            _result = await accountService.Create(model);
         }
 
         [Test]
@@ -104,25 +104,25 @@ namespace Parallel.Universe.Blog.Tests.Unit_Tests.Services
         [OneTimeSetUp]
         public new async Task SetUp()
         {
-            var account = AccountBuilder.Generate();
-            account.User = UserBuilder.WithActive(true).Generate();
+            var account = accountBuilder.Generate();
+            account.User = userBuilder.WithActive(true).Generate();
             _model = new LoginViewModel { Password = account.Password.Value };
 
             account.Password.Encrypt();
 
-            AccountRepositoryMock.Setup(x => x.GetByEmailAsync(_model.Email)).ReturnsAsync(account);
-            TokenServiceMock.Setup(x => x.GenerateToken(It.IsAny<User>())).Returns("token");
+            accountRepositoryMock.Setup(x => x.GetByEmailAsync(_model.Email)).ReturnsAsync(account);
+            tokenServiceMock.Setup(x => x.GenerateToken(It.IsAny<User>())).Returns("token");
 
-            _result = await AccountService.Verify(_model);
+            _result = await accountService.Verify(_model);
         }
 
         [Test]
         public void ShouldCallMethodGetByEmailAsync() =>
-            AccountRepositoryMock.Verify(x => x.GetByEmailAsync(_model.Email), Times.Once);
+            accountRepositoryMock.Verify(x => x.GetByEmailAsync(_model.Email), Times.Once);
 
         [Test]
         public void ShouldCallMethodGenerateToken() =>
-                   TokenServiceMock.Verify(x => x.GenerateToken(It.IsAny<User>()), Times.Once);
+                   tokenServiceMock.Verify(x => x.GenerateToken(It.IsAny<User>()), Times.Once);
 
         [Test]
         public void ShouldReturnTheCorrectMessage() => _result.Message.Should().Be("Login successfully.");
@@ -143,13 +143,13 @@ namespace Parallel.Universe.Blog.Tests.Unit_Tests.Services
         public new async Task SetUp()
         {
             _model = new AutoFaker<LoginViewModel>().Generate();
-            AccountRepositoryMock.Setup(x => x.GetByEmailAsync(_model.Email)).ReturnsAsync(value: null);
-            _result = await AccountService.Verify(_model);
+            accountRepositoryMock.Setup(x => x.GetByEmailAsync(_model.Email)).ReturnsAsync(value: null);
+            _result = await accountService.Verify(_model);
         }
 
         [Test]
         public void ShouldCallMethodGetByEmailAsync() =>
-                AccountRepositoryMock.Verify(x => x.GetByEmailAsync(_model.Email), Times.Once);
+                accountRepositoryMock.Verify(x => x.GetByEmailAsync(_model.Email), Times.Once);
 
         [Test]
         public void ShouldReturnTheCorrectMessage() => _result.Message.Should().Be("Invalid email or password.");
@@ -163,16 +163,16 @@ namespace Parallel.Universe.Blog.Tests.Unit_Tests.Services
         [OneTimeSetUp]
         public new async Task SetUp()
         {
-            var account = AccountBuilder.Generate();
+            var account = accountBuilder.Generate();
             _model = new AutoFaker<LoginViewModel>().Generate();
             account.Password.Encrypt();
-            AccountRepositoryMock.Setup(x => x.GetByEmailAsync(_model.Email)).ReturnsAsync(account);
-            _result = await AccountService.Verify(_model);
+            accountRepositoryMock.Setup(x => x.GetByEmailAsync(_model.Email)).ReturnsAsync(account);
+            _result = await accountService.Verify(_model);
         }
 
         [Test]
         public void ShouldCallMethodGetByEmailAsync() =>
-            AccountRepositoryMock.Verify(x => x.GetByEmailAsync(_model.Email), Times.Once);
+            accountRepositoryMock.Verify(x => x.GetByEmailAsync(_model.Email), Times.Once);
 
         [Test]
         public void ShouldReturnTheCorrectMessage() => _result.Message.Should().Be("Invalid email or password.");

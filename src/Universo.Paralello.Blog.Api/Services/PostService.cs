@@ -19,7 +19,7 @@ namespace Parallel.Universe.Blog.Api.Services
         private readonly IUserRepository _userRepository;
         private readonly IMapper mapper;
 
-        public PostService(IPostRepository postRepository, IMapper mapper, IUserRepository userRepository)
+        public PostService(IPostRepository postRepository, IUserRepository userRepository, IMapper mapper)
         {
             _postRepository = postRepository;
             _userRepository = userRepository;
