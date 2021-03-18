@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "kUWNCFOZYMTNdadXnliJeBTU5Yp7yx4xYMmndr8WonhQsurCYmMDT+LVSkYYhWEvyeZycIwMwPcUw+5s0/qABQ==",
+  "dgSpecHash": "sRKKsjBanz4/DcIzYUfFvHD8VUqfsAEe6FmrD90Npyy3eWJgijeJYf8YwyOEvZvbQe2vnOle+E+YIIutVRuqqg==",
   "success": true,
   "projectFilePath": "C:\\Users\\GregoriBrunoFelicio\\Desktop\\Repositories\\Universo.Paralello.Blog\\src\\Universo.Paralello.Blog.Unit.Tests\\Parallel.Universe.Blog.Tests.csproj",
   "expectedPackageFiles": [
@@ -77,7 +77,7 @@
     "C:\\Users\\GregoriBrunoFelicio\\.nuget\\packages\\netstandard.library\\2.0.0\\netstandard.library.2.0.0.nupkg.sha512",
     "C:\\Users\\GregoriBrunoFelicio\\.nuget\\packages\\newtonsoft.json\\9.0.1\\newtonsoft.json.9.0.1.nupkg.sha512",
     "C:\\Users\\GregoriBrunoFelicio\\.nuget\\packages\\nuget.frameworks\\5.0.0\\nuget.frameworks.5.0.0.nupkg.sha512",
-    "C:\\Microsoft\\Xamarin\\NuGet\\nunit\\3.12.0\\nunit.3.12.0.nupkg.sha512",
+    "C:\\Users\\GregoriBrunoFelicio\\.nuget\\packages\\nunit\\3.12.0\\nunit.3.12.0.nupkg.sha512",
     "C:\\Users\\GregoriBrunoFelicio\\.nuget\\packages\\nunit3testadapter\\3.16.1\\nunit3testadapter.3.16.1.nupkg.sha512",
     "C:\\Users\\GregoriBrunoFelicio\\.nuget\\packages\\runtime.native.system\\4.3.0\\runtime.native.system.4.3.0.nupkg.sha512",
     "C:\\Users\\GregoriBrunoFelicio\\.nuget\\packages\\swashbuckle.aspnetcore\\5.6.3\\swashbuckle.aspnetcore.5.6.3.nupkg.sha512",

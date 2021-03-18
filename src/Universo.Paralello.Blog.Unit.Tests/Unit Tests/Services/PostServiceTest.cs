@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using FluentAssertions;
 using Moq;
 using NUnit.Framework;
 using Parallel.Universe.Blog.Api.Data.Repositories;
@@ -19,6 +20,7 @@ namespace Parallel.Universe.Blog.Tests.Unit_Tests.Services
         protected PostService postService;
         protected PostViewModelBuilder postViewModelBuilder;
         protected PostBuilder postBuilder;
+        protected UserBuilder userBuilder;
 
         [OneTimeSetUp]
         public void SetUp()
@@ -28,14 +30,47 @@ namespace Parallel.Universe.Blog.Tests.Unit_Tests.Services
             mapperMock = new Mock<IMapper>();
             postViewModelBuilder = new PostViewModelBuilder();
             postBuilder = new PostBuilder();
-
+            userBuilder = new UserBuilder();
             postService = new PostService(postRepositoryMock.Object, userRepositoryMock.Object, mapperMock.Object);
         }
     }
 
-    public class PostCreateTests : PostServiceTest
+    public class PostServiceCreateTests : PostServiceTest
     {
 
+        private IResult result;
+
+        [OneTimeSetUp]
+        public new async Task SetUp()
+        {
+            var post = postBuilder.Generate();
+            var model = postViewModelBuilder.WithUserId(1).WithActive(true).Generate();
+            var user = userBuilder.WithActive(true).Generate();
+
+            mapperMock.Setup(x => x.Map<Post>(model)).Returns(post);
+            userRepositoryMock.Setup(x => x.GetByIdAsync(It.IsAny<int>())).ReturnsAsync(user);
+            result = await postService.Create(model);
+        }
+
+        [Test]
+        public void ShouldCallMapper() => mapperMock.Verify(
+            x => x.Map<Post>(It.IsAny<PostViewModel>()), Times.Once);
+
+        [Test]
+        public void ShouldCallMethodGetByIdAsync() =>
+            userRepositoryMock.Verify(x => x.GetByIdAsync(It.IsAny<int>()), Times.Once);
+
+        [Test]
+        public void ShouldCallMethodAddAsync() =>
+            postRepositoryMock.Verify(x => x.AddAsync(It.IsAny<Post>()), Times.Once);
+
+        [Test]
+        public void ShouldReturnTheCorrectResultMessage() =>
+            result.Message.Should().Be("Post created successfully.");
+    }
+
+    public class PostServiceCreateUserNotFoundTests : PostServiceTest
+    {
         private IResult result;
 
         [OneTimeSetUp]
@@ -49,7 +84,67 @@ namespace Parallel.Universe.Blog.Tests.Unit_Tests.Services
         }
 
         [Test]
+        public void ShouldReturnTheCorrectResultMessage() =>
+                    result.Message.Should().Be("User not found.");
+
+    }
+
+    public class PostServiceCreateInactiveAccount : PostServiceTest
+    {
+        private IResult result;
+
+        [OneTimeSetUp]
+        public new async Task SetUp()
+        {
+            var post = postBuilder.Generate();
+            var model = postViewModelBuilder.WithUserId(1).WithActive(true).Generate();
+            var user = userBuilder.WithActive(false).Generate();
+
+            mapperMock.Setup(x => x.Map<Post>(model)).Returns(post);
+            userRepositoryMock.Setup(x => x.GetByIdAsync(It.IsAny<int>())).ReturnsAsync(user);
+            result = await postService.Create(model);
+        }
+
+        [Test]
+        public void ShouldReturnTheCorrectResultMessage() =>
+            result.Message.Should().Be("Inactive account.");
+    }
+
+    public class PostUpdateTests : PostServiceTest
+    {
+        private IResult result;
+
+        [OneTimeSetUp]
+        public new async Task SetUp()
+        {
+
+            var model = postViewModelBuilder.WithUserId(1).WithActive(true).Generate();
+            var user = userBuilder.WithActive(true).Generate();
+            var post = postBuilder.WithUser(user).Generate();
+            var oldPost = postBuilder.WithUser(user).Generate();
+
+            mapperMock.Setup(x => x.Map<Post>(model)).Returns(post);
+            userRepositoryMock.Setup(x => x.GetByIdAsync(It.IsAny<int>())).ReturnsAsync(user);
+            postRepositoryMock.Setup(x => x.GetByIdAsync(It.IsAny<int>())).ReturnsAsync(oldPost);
+            result = await postService.Update(model);
+        }
+
+        [Test]
         public void ShouldCallMapper() => mapperMock.Verify(
             x => x.Map<Post>(It.IsAny<PostViewModel>()), Times.Once);
+
+        [Test]
+        public void ShouldCallMethodGetByIdAsync() =>
+            userRepositoryMock.Verify(x => x.GetByIdAsync(It.IsAny<int>()), Times.Once);
+
+        [Test]
+        public void ShouldCallMethodUpdateAAsync() =>
+            postRepositoryMock.Verify(x => x.UpdateAsync(It.IsAny<Post>()), Times.Once);
+
+        [Test]
+        public void ShouldReturnTheCorrectResultMessage() =>
+            result.Message.Should().Be("Post updated successfully.");
+
     }
+
 }

@@ -8,7 +8,7 @@ using Xunit;
 
 namespace Parallel.Universe.Blog.Tests.Shared
 {
-    public class TestFixture : IClassFixture<BaseIntegrationTest>
+    public class IntegrationBase : IClassFixture<WebFactory>
     {
         protected HttpClient Client;
         protected ParallelUniverseBlogContext Context;
@@ -16,7 +16,7 @@ namespace Parallel.Universe.Blog.Tests.Shared
         [OneTimeSetUp]
         public void SetUp()
         {
-            var factory = new BaseIntegrationTest();
+            var factory = new WebFactory();
             Context = factory.Services.CreateScope().ServiceProvider.GetService<ParallelUniverseBlogContext>();
             Client = factory.WithWebHostBuilder(builder => builder.ConfigureTestServices(services => services.AddSingleton<IPolicyEvaluator, FakePolicyEvaluator>())).CreateClient();
         }

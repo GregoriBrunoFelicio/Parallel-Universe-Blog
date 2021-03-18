@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Parallel.Universe.Blog.Tests.Integration_Tests
 {
-    public class UserTests : TestFixture
+    public class UserTests : IntegrationBase
     {
         protected UserViewModelBuilder UserViewModelBuilder;
         protected UserBuilder UserBuilder;

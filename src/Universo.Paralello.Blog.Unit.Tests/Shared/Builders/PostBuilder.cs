@@ -13,7 +13,7 @@ namespace Parallel.Universe.Blog.Tests.Shared.Builders
                 f.Random.Words(),
                 f.Date.Future(),
                 f.Random.Bool(),
-                f.Random.Int()
+                0
             ));
 
         public PostBuilder WithActive(bool active)

@@ -38,7 +38,7 @@ namespace Parallel.Universe.Blog.Api.Services
 
             await _postRepository.AddAsync(post);
 
-            return new Result("Post created successfully", true);
+            return new Result("Post created successfully.", true);
         }
 
         public async Task<IResult> Update(PostViewModel model)
@@ -52,7 +52,7 @@ namespace Parallel.Universe.Blog.Api.Services
 
             if (!user.Active) return new Result("Inactive account.", false);
 
-            if (oldPost.User.Id != post.UserId) return new Result("You could not edit this post.", false);
+            if (oldPost.User.Id != user.Id) return new Result("You could not edit this post.", false);
 
             await _postRepository.UpdateAsync(post);
 
