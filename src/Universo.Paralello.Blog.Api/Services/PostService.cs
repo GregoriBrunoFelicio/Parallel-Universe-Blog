@@ -46,7 +46,7 @@ namespace Parallel.Universe.Blog.Api.Services
             var post = mapper.Map<Post>(model);
 
             var oldPost = await _postRepository.GetByIdAsync(model.Id);
-            var user = await _userRepository.GetByIdAsync(post.UserId);
+            var user = await _userRepository.GetByIdAsync(model.UserId);
 
             if (user == null) return new Result("User not found.", false);
 

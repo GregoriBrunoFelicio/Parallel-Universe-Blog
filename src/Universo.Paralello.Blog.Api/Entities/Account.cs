@@ -6,9 +6,8 @@ namespace Parallel.Universe.Blog.Api.Entities
     {
         public Account() { }
 
-        public Account(int id, string email, Password password)
+        public Account(int id, string email, Password password) : base(id)
         {
-            Id = id;
             Email = email;
             Password = password;
         }

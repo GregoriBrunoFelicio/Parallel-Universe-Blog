@@ -4,18 +4,16 @@ namespace Parallel.Universe.Blog.Api.Entities
 {
     public class Post : Entity
     {
-        public Post(int id, string title, string description, string text, int userId)
+        public Post(int id, string title, string description, string text, int userId) : base(id)
         {
-            Id = id;
             Title = title;
             Description = description;
             Text = text;
             UserId = userId;
         }
 
-        public Post(int id, string title, string description, string text, DateTime date, bool active, int userId)
+        public Post(int id, string title, string description, string text, DateTime date, bool active, int userId) : base(id)
         {
-            Id = id;
             Title = title;
             Description = description;
             Text = text;

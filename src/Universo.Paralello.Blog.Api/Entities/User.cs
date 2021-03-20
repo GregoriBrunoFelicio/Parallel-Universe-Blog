@@ -6,16 +6,14 @@ namespace Parallel.Universe.Blog.Api.Entities
     {
         public User() { }
 
-        public User(int id, string name, string about)
+        public User(int id, string name, string about) : base(id)
         {
-            Id = id;
             Name = name;
             About = about;
         }
 
-        public User(int id, string name, Account account, bool active)
+        public User(int id, string name, Account account, bool active) : base(id)
         {
-            Id = id;
             Name = name;
             Account = account;
             Active = active;
@@ -23,8 +21,10 @@ namespace Parallel.Universe.Blog.Api.Entities
 
         public string Name { get; }
         public string About { get; }
-        public bool Active { get; set; }
+        public bool Active { get; protected set; }
         public virtual Account Account { get; }
         public virtual ICollection<Post> Posts { get; }
+
+        public void SetActive(bool active) => Active = active;
     }
 }

@@ -32,7 +32,7 @@ namespace Parallel.Universe.Blog.Api.Controllers
         {
             var user = await _userRepository.GetByIdAsync(id);
             if (user == null) return NotFound("User not found.");
-            user.Active = false;
+            user.SetActive(false);
             return Ok(await _userRepository.UpdateAsync(user));
         }
     }

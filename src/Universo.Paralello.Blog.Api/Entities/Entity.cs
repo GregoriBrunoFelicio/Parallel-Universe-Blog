@@ -3,6 +3,13 @@ namespace Parallel.Universe.Blog.Api.Entities
 {
     public abstract class Entity
     {
-        public int Id { get; set; }
+        protected Entity()
+        {
+
+        }
+
+        public virtual int Id { get; }
+
+        protected Entity(int id) => Id = id;
     }
 }

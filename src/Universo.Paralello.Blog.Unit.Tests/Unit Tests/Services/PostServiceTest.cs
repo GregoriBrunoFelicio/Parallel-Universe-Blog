@@ -144,7 +144,71 @@ namespace Parallel.Universe.Blog.Tests.Unit_Tests.Services
         [Test]
         public void ShouldReturnTheCorrectResultMessage() =>
             result.Message.Should().Be("Post updated successfully.");
-
     }
+
+
+    public class PostUpdateNotFoundUserTests : PostServiceTest
+    {
+        private IResult result;
+
+        [OneTimeSetUp]
+        public new async Task SetUp()
+        {
+            var model = postViewModelBuilder.WithUserId(1).WithActive(true).Generate();
+            result = await postService.Update(model);
+        }
+
+        [Test]
+        public void ShouldReturnTheCorrectResultMessage() =>
+                   result.Message.Should().Be("User not found.");
+    }
+
+    public class PostUpdateInactiveAccountTests : PostServiceTest
+    {
+        private IResult result;
+
+        [OneTimeSetUp]
+        public new async Task SetUp()
+        {
+            var model = postViewModelBuilder.WithUserId(1).WithActive(true).Generate();
+            var user = userBuilder.WithActive(false).Generate();
+            var post = postBuilder.WithUser(user).Generate();
+            var oldPost = postBuilder.WithUser(user).Generate();
+
+            mapperMock.Setup(x => x.Map<Post>(model)).Returns(post);
+            userRepositoryMock.Setup(x => x.GetByIdAsync(It.IsAny<int>())).ReturnsAsync(user);
+            postRepositoryMock.Setup(x => x.GetByIdAsync(It.IsAny<int>())).ReturnsAsync(oldPost);
+            result = await postService.Update(model);
+        }
+
+        [Test]
+        public void ShouldReturnTheCorrectResultMessage() =>
+            result.Message.Should().Be("Inactive account.");
+    }
+
+    public class PostUpdatePostNotFromUserTests : PostServiceTest
+    {
+        private IResult result;
+
+        [OneTimeSetUp]
+        public new async Task SetUp()
+        {
+            var model = postViewModelBuilder.WithUserId(1).WithActive(true).Generate();
+            var user = new User(10, null, null, true);
+            var anotherUser = new User(20, null, null, true);
+            var post = postBuilder.WithUser(user).Generate();
+            var oldPost = postBuilder.WithUser(anotherUser).Generate();
+
+            mapperMock.Setup(x => x.Map<Post>(model)).Returns(post);
+            userRepositoryMock.Setup(x => x.GetByIdAsync(It.IsAny<int>())).ReturnsAsync(user);
+            postRepositoryMock.Setup(x => x.GetByIdAsync(It.IsAny<int>())).ReturnsAsync(oldPost);
+            result = await postService.Update(model);
+        }
+
+        [Test]
+        public void ShouldReturnTheCorrectResultMessage() =>
+            result.Message.Should().Be("You could not edit this post.");
+    }
+
 
 }
