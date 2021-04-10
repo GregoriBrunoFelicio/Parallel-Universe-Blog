@@ -26,7 +26,7 @@ namespace Parallel.Universe.Blog.Api
 
             services.AddDbContext<ParallelUniverseBlogContext>(x =>
                 x.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"))
-                    .UseLazyLoadingProxies()); 
+                    .UseLazyLoadingProxies());
 
             Swagger.Configure(services);
             Ioc.RegisterServices(services);
@@ -44,8 +44,12 @@ namespace Parallel.Universe.Blog.Api
 
             app.UseHttpsRedirection();
             app.UseRouting();
+            app.UseCors(x => x
+                .AllowAnyMethod()
+                .AllowAnyHeader()
+                .SetIsOriginAllowed(origin => true)
+                .AllowCredentials());
             app.UseAuthentication();
-            app.UseAuthorization();
             app.UseAuthorization();
             app.UseEndpoints(endpoints =>
             {
