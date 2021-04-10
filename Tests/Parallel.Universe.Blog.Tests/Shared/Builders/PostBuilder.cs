@@ -16,16 +16,12 @@ namespace Parallel.Universe.Blog.Tests.Shared.Builders
                 0
             ));
 
-        public PostBuilder WithActive(bool active)
+
+        public PostBuilder WithUserId(int userId)
         {
-            RuleFor(x => x.Active, () => active);
+            RuleFor(x => x.UserId, () => userId);
             return this;
         }
 
-        public PostBuilder WithUser(User user)
-        {
-            RuleFor(x => x.User, () => user);
-            return this;
-        }
     }
 }

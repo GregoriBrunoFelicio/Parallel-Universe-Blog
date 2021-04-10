@@ -105,7 +105,8 @@ namespace Parallel.Universe.Blog.Tests.Unit_Tests.Services
         public new async Task SetUp()
         {
             var account = accountBuilder.Generate();
-            account.User = userBuilder.WithActive(true).Generate();
+            var user = userBuilder.WithActive(true).Generate();
+            account.SetUser(user);
             _model = new LoginViewModel { Password = account.Password.Value };
 
             account.Password.Encrypt();

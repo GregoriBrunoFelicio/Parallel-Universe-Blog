@@ -4,6 +4,11 @@ namespace Parallel.Universe.Blog.Api.Entities
 {
     public class Post : Entity
     {
+        public Post()
+        {
+
+        }
+        
         public Post(int id, string title, string description, string text, int userId) : base(id)
         {
             Title = title;
@@ -27,7 +32,7 @@ namespace Parallel.Universe.Blog.Api.Entities
         public string Text { get; }
         public DateTime Date { get; }
         public bool Active { get; }
-        public int UserId { get; set; }
-        public virtual User User { get; set; }
+        public int UserId { get; }
+        public virtual User User { get; }
     }
 }

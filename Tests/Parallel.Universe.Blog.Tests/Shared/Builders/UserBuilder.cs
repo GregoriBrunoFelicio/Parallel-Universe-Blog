@@ -17,5 +17,11 @@ namespace Parallel.Universe.Blog.Tests.Shared.Builders
             RuleFor(x => x.Active, active);
             return this;
         }
+
+        public UserBuilder WithId(int id)
+        {
+            RuleFor(x => x.Id, () => id);
+            return this;
+        }
     }
 }
