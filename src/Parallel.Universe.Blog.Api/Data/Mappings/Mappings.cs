@@ -36,7 +36,7 @@ namespace Parallel.Universe.Blog.Api.Data.Mappings
             builder.Property(x => x.Text).IsRequired().HasColumnType("varchar(MAX)");
             builder.Property(x => x.Date).IsRequired().HasColumnType("date");
             builder.Property(x => x.Active).IsRequired().HasColumnType("bit");
-            builder.HasOne(x => x.User).WithMany(x => x.Posts).IsRequired();
+            builder.HasOne(x => x.User).WithMany(x => x.Posts).HasForeignKey(x => x.UserId).IsRequired();
         }
     }
 }
