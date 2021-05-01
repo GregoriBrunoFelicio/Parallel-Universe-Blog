@@ -17,4 +17,18 @@ namespace Parallel.Universe.Blog.Api.ViewModels
 
         public bool Active { get; set; }
     }
+
+    public class UserInfoViewModel
+    {
+        public UserInfoViewModel(int id, string name, string about)
+        {
+            Id = id;
+            Name = name;
+            About = about;
+        }
+
+        public int Id { get; }
+        public string Name { get; }
+        public string About { get; }
+    }
 }

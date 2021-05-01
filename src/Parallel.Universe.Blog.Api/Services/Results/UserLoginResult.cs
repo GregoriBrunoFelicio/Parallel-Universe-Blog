@@ -1,4 +1,6 @@
-﻿namespace Parallel.Universe.Blog.Api.Services.Results
+﻿using Parallel.Universe.Blog.Api.ViewModels;
+
+namespace Parallel.Universe.Blog.Api.Services.Results
 {
     public interface ILoginResult : IResult
     {
@@ -7,19 +9,17 @@
 
     public class LoginResult : ILoginResult
     {
-        public LoginResult(string mensagem, bool sucesso, int userId = default, string userName = "", string token = "")
+        public LoginResult(string mensagem, bool sucesso, UserInfoViewModel user = default, string token = "")
         {
             Message = mensagem;
             Success = sucesso;
-            UserId = userId;
-            UserName = userName;
             Token = token;
+            User = user;
         }
 
         public string Token { get; }
         public string Message { get; }
         public bool Success { get; }
-        public int? UserId { get; set; }
-        public string UserName { get; set; }
+        public UserInfoViewModel User { get; set; }
     }
 }
