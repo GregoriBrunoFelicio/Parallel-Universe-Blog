@@ -31,8 +31,8 @@ namespace Parallel.Universe.Blog.Api.Controllers
         {
             var result = await _postService.Create(model);
             return !result.Success
-                ? (IActionResult)BadRequest(result.Message)
-                : Ok(result.Message);
+                ? (IActionResult)BadRequest(result)
+                : Ok(result);
         }
 
         [HttpPut]
@@ -41,8 +41,8 @@ namespace Parallel.Universe.Blog.Api.Controllers
         {
             var result = await _postService.Update(model);
             return !result.Success
-                ? (IActionResult)BadRequest(result.Message)
-                : Ok(result.Message);
+                ? (IActionResult)BadRequest(result)
+                : Ok(result);
         }
 
         [HttpGet("AllActive")]
