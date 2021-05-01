@@ -56,7 +56,7 @@ namespace Parallel.Universe.Blog.Api.Services
 
             var token = _tokenService.GenerateToken(account.User);
 
-            return new LoginResult("Login successfully.", true, token);
+            return new LoginResult("Login successfully.", true, account.UserId, account.User.Name, token);
         }
 
         private async Task<bool> EmailAlreadyRegistred(string email) =>
