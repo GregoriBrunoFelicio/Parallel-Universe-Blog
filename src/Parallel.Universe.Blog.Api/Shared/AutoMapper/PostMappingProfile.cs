@@ -8,6 +8,6 @@ namespace Parallel.Universe.Blog.Api.Shared.AutoMapper
     {
         public PostMappingProfile() =>
             CreateMap<PostViewModel, Post>().ConstructUsing(x =>
-                new Post(x.Id, x.Title, x.Description, x.Text, x.Date, x.Active, x.UserId));
+                new Post(x.Id, x.Title, x.Description, x.Text, x.Date, x.Active, x.UserId)).ReverseMap();
     }
 }

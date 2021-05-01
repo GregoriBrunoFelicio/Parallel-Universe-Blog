@@ -1,7 +1,10 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Parallel.Universe.Blog.Api.Data.Repositories;
 using Parallel.Universe.Blog.Api.Services;
 using Parallel.Universe.Blog.Api.ViewModels;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Parallel.Universe.Blog.Api.Controllers
@@ -12,8 +15,15 @@ namespace Parallel.Universe.Blog.Api.Controllers
     public class PostController : ControllerBase
     {
         private readonly IPostService _postService;
+        private readonly IPostRepository _postRepository;
+        private readonly IMapper _mapper;
 
-        public PostController(IPostService postService) => _postService = postService;
+        public PostController(IPostService postService, IPostRepository postRepository, IMapper mapper)
+        {
+            _postService = postService;
+            _postRepository = postRepository;
+            _mapper = mapper;
+        }
 
         [HttpPost]
         [Authorize(Roles = "Admin")]
@@ -34,5 +44,8 @@ namespace Parallel.Universe.Blog.Api.Controllers
                 ? (IActionResult)BadRequest(result.Message)
                 : Ok(result.Message);
         }
+
+        [HttpGet("AllActive")]
+        public async Task<IActionResult> GetAllActive() => Ok(_mapper.Map<IEnumerable<PostViewModel>>(await _postRepository.GetAllActivePostsAsync()));
     }
 }
