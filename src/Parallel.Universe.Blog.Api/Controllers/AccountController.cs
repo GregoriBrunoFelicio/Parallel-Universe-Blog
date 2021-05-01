@@ -19,8 +19,8 @@ namespace Parallel.Universe.Blog.Api.Controllers
         {
             var result = await _accountService.Create(model);
             return !result.Success
-                ? (IActionResult)BadRequest(result.Message)
-                : Ok(result.Message);
+                ? (IActionResult)BadRequest(result)
+                : Ok(result);
         }
 
         [HttpPost("Login")]
@@ -28,7 +28,7 @@ namespace Parallel.Universe.Blog.Api.Controllers
         {
             var result = await _accountService.Verify(model);
             return !result.Success
-                ? (IActionResult)BadRequest(result.Message)
+                ? (IActionResult)BadRequest(result)
                 : Ok(result);
         }
     }
