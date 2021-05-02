@@ -27,7 +27,7 @@ namespace Parallel.Universe.Blog.Tests.Integration_Tests
         }
     }
 
-    public class CreateTests : AccountTests
+    public class AccountCreateTests : AccountTests
     {
 
         [Test]
