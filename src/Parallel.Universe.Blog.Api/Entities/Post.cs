@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Parallel.Universe.Blog.Api.Entities
 {
@@ -8,7 +9,7 @@ namespace Parallel.Universe.Blog.Api.Entities
         {
 
         }
-        
+
         public Post(int id, string title, string description, string text, int userId) : base(id)
         {
             Title = title;
@@ -34,5 +35,6 @@ namespace Parallel.Universe.Blog.Api.Entities
         public bool Active { get; }
         public int UserId { get; }
         public virtual User User { get; }
+        public virtual IReadOnlyCollection<Comment> Comments { get; }
     }
 }
