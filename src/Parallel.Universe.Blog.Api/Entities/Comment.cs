@@ -4,6 +4,11 @@ namespace Parallel.Universe.Blog.Api.Entities
 {
     public class Comment : Entity
     {
+        public Comment()
+        {
+
+        }
+
         public Comment(int id, string content, DateTime date, int postId) : base(id)
         {
             Content = content;

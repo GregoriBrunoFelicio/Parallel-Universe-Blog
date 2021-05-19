@@ -37,7 +37,7 @@ namespace Parallel.Universe.Blog.Api.Data.Mappings
             builder.Property(x => x.Date).IsRequired().HasColumnType("date");
             builder.Property(x => x.Active).IsRequired().HasColumnType("bit");
             builder.HasOne(x => x.User).WithMany(x => x.Posts).HasForeignKey(x => x.UserId).IsRequired();
-            builder.HasMany(x => x.Comments).WithOne(x => x.Post).HasForeignKey(x => x.PostId);
+            builder.HasMany(x => x.Comments).WithOne(x => x.Post).HasForeignKey(x => x.Id);
         }
     }
 
