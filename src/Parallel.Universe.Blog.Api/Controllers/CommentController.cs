@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Parallel.Universe.Blog.Api.Data.Repositories;
 using Parallel.Universe.Blog.Api.Entities;
 using Parallel.Universe.Blog.Api.ViewModels;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Parallel.Universe.Blog.Api.Controllers
@@ -12,7 +13,7 @@ namespace Parallel.Universe.Blog.Api.Controllers
     public class CommentController : ControllerBase
     {
         private readonly ICommentRepository _commentRepository;
-        private IMapper _mapper;
+        private readonly IMapper _mapper;
 
         public CommentController(ICommentRepository commentRepository, IMapper mapper)
         {
@@ -27,5 +28,8 @@ namespace Parallel.Universe.Blog.Api.Controllers
             await _commentRepository.AddAsync(post);
             return Ok();
         }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> Get(int id) => Ok(_mapper.Map<IReadOnlyCollection<CommentViewModel>>(await _commentRepository.GetAllByPostId(id)));
     }
 }
