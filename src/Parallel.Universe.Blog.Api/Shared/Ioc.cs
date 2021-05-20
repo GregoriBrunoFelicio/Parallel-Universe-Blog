@@ -15,6 +15,7 @@ namespace Parallel.Universe.Blog.Api.Shared
             services.AddScoped<IPostRepository, PostRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IAccountRepository, AccountRepository>();
+            services.AddScoped<ICommentRepository, CommentRepository>();
         }
     }
 }
