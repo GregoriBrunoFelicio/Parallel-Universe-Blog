@@ -29,6 +29,10 @@ namespace Parallel.Universe.Blog.Api.Controllers
             return Ok();
         }
 
+        [HttpDelete("id")]
+        public async Task<IActionResult> Delete(int id) =>
+            (await _commentRepository.Delete(id)) ? (IActionResult)Ok() : BadRequest();
+
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(int id) => Ok(_mapper.Map<IReadOnlyCollection<CommentViewModel>>(await _commentRepository.GetAllByPostId(id)));
     }

@@ -1,6 +1,6 @@
-﻿using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Parallel.Universe.Blog.Api.Entities;
+using System.Threading.Tasks;
 
 namespace Parallel.Universe.Blog.Api.Data.Repositories
 {
@@ -9,6 +9,7 @@ namespace Parallel.Universe.Blog.Api.Data.Repositories
         Task AddAsync(T obj);
         Task<T> UpdateAsync(T obj);
         Task<T> GetByIdAsync(int id);
+        Task<bool> Delete(int id);
     }
 
     public class Repository<T> : IRepository<T> where T : Entity
@@ -37,5 +38,12 @@ namespace Parallel.Universe.Blog.Api.Data.Repositories
         }
 
         public async Task<T> GetByIdAsync(int id) => await _dbSet.SingleOrDefaultAsync(x => x.Id == id);
+
+        public async Task<bool> Delete(int id)
+        {
+            var obj = await GetByIdAsync(id);
+            Context.Remove(obj);
+            return await Context.SaveChangesAsync() > 0;
+        }
     }
 }

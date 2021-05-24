@@ -19,6 +19,7 @@ namespace Parallel.Universe.Blog.Api.Data
             modelBuilder
                 .ApplyConfiguration(new UserMapping())
                 .ApplyConfiguration(new AccountMapping())
-                .ApplyConfiguration(new PostMapping());
+                .ApplyConfiguration(new PostMapping())
+                .ApplyConfiguration(new CommentMapping());
     }
 }
