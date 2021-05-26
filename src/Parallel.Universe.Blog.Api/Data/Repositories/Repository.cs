@@ -23,13 +23,13 @@ namespace Parallel.Universe.Blog.Api.Data.Repositories
             _dbSet = Context.Set<T>();
         }
 
-        public async Task AddAsync(T obj)
+        public virtual async Task AddAsync(T obj)
         {
             await Context.AddAsync(obj);
             await Context.SaveChangesAsync();
         }
 
-        public async Task<T> UpdateAsync(T obj)
+        public virtual async Task<T> UpdateAsync(T obj)
         {
             var objFromDb = await GetByIdAsync(obj.Id);
             Context.Entry(objFromDb).CurrentValues.SetValues(obj);
@@ -37,9 +37,9 @@ namespace Parallel.Universe.Blog.Api.Data.Repositories
             return obj;
         }
 
-        public async Task<T> GetByIdAsync(int id) => await _dbSet.SingleOrDefaultAsync(x => x.Id == id);
+        public virtual async Task<T> GetByIdAsync(int id) => await _dbSet.SingleOrDefaultAsync(x => x.Id == id);
 
-        public async Task<bool> Delete(int id)
+        public virtual async Task<bool> Delete(int id)
         {
             var obj = await GetByIdAsync(id);
             Context.Remove(obj);
