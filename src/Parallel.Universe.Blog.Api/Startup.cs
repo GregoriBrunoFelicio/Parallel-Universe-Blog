@@ -23,10 +23,10 @@ namespace Parallel.Universe.Blog.Api
         {
             services.AddControllers().ConfigureApiBehaviorOptions(options => options.SuppressModelStateInvalidFilter = true);
             services.AddAutoMapper(typeof(Startup));
-
             services.AddDbContext<ParallelUniverseBlogContext>(x =>
                 x.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"))
                     .UseLazyLoadingProxies());
+            services.AddApplicationInsightsTelemetry();
 
             Swagger.Configure(services);
             Ioc.RegisterServices(services);
