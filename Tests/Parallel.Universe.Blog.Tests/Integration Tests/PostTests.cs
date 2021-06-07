@@ -63,4 +63,23 @@ namespace Parallel.Universe.Blog.Tests.Integration_Tests
             response.StatusCode.Should().Be(HttpStatusCode.OK);
         }
     }
+
+    public class PostGetAllActive : PostTests
+    {
+        [Test]
+        public async Task ShouldReturnOk()
+        {
+            var user = new UserBuilder().WithActive(true).Generate();
+            await userRepository.AddAsync(user);
+
+            var post = new Post(0, "Title", "Description", "Text", DateTime.Now, true, user.Id);
+            await postRepository.AddAsync(post);
+
+            await Context.SaveChangesAsync();
+
+            var response = await Client.GetAsync("Post/AllActive");
+            response.StatusCode.Should().Be(HttpStatusCode.OK);
+        }
+    }
+
 }
