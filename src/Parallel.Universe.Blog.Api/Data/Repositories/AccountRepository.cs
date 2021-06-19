@@ -17,6 +17,7 @@ namespace Parallel.Universe.Blog.Api.Data.Repositories
 
         public async Task<Account> GetByEmailAsync(string email) =>
                 await Context.Set<Account>()
+                    .Include(x => x.User)
                     .AsNoTracking()
                     .SingleOrDefaultAsync(x => x.Email == email);
     }
