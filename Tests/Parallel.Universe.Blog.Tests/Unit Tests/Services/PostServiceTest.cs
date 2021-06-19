@@ -97,7 +97,7 @@ namespace Parallel.Universe.Blog.Tests.Unit_Tests.Services
         public new async Task SetUp()
         {
             var post = postBuilder.Generate();
-            var model = postViewModelBuilder.WithUserId(1).WithActive(true).Generate();
+            var model = postViewModelBuilder.Generate();
             var user = userBuilder.WithActive(false).Generate();
 
             mapperMock.Setup(x => x.Map<Post>(model)).Returns(post);

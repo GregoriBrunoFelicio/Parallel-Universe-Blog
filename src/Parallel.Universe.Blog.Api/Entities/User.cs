@@ -12,19 +12,19 @@ namespace Parallel.Universe.Blog.Api.Entities
             About = about;
         }
 
-        public User(int id, string name, Account account, bool active) : base(id)
+        public User(int id, string name, string about, Account account, bool active) : base(id)
         {
             Name = name;
+            About = about;
             Account = account;
             Active = active;
         }
 
         public string Name { get; }
         public string About { get; }
-        public bool Active { get; protected set; }
+        public bool Active { get; }
         public virtual Account Account { get; }
         public virtual ICollection<Post> Posts { get; }
 
-        public void SetActive(bool active) => Active = active;
     }
 }

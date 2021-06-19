@@ -34,9 +34,11 @@ namespace Parallel.Universe.Blog.Api.Controllers
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Inactivate(int id)
         {
-            var user = await _userRepository.GetByIdAsync(id);
-            if (user == null) return NotFound("User not found.");
-            user.SetActive(false);
+            var userFromDb = await _userRepository.GetByIdAsync(id);
+            if (userFromDb == null) return NotFound("User not found.");
+
+            var user = new User(id, userFromDb.Name, userFromDb.About, userFromDb.Account, false);
+
             await _userRepository.UpdateAsync(user);
             return Ok();
         }

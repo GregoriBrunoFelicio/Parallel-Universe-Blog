@@ -10,11 +10,13 @@ namespace Parallel.Universe.Blog.Tests.Shared.Builders
                 new User(
                     0,
                     f.Random.Word(),
-                    new AccountBuilder(), f.Random.Bool()));
+                    f.Random.Words(),
+                    new AccountBuilder(),
+                    f.Random.Bool()));
 
         public UserBuilder WithActive(bool active)
         {
-            RuleFor(x => x.Active, active);
+            CustomInstantiator(f => new User(0, f.Random.Word(), f.Random.Words(), new AccountBuilder(), active));
             return this;
         }
 
