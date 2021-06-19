@@ -1,6 +1,6 @@
-﻿using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Parallel.Universe.Blog.Api.Entities;
+using System.Threading.Tasks;
 
 namespace Parallel.Universe.Blog.Api.Data.Repositories
 {
@@ -9,14 +9,15 @@ namespace Parallel.Universe.Blog.Api.Data.Repositories
         Task<Account> GetByEmailAsync(string email);
     }
 
-    public class AccountRepository: Repository<Account>, IAccountRepository
+    public class AccountRepository : Repository<Account>, IAccountRepository
     {
         public AccountRepository(ParallelUniverseBlogContext context) : base(context)
         {
         }
 
-        public async Task<Account> GetByEmailAsync(string email) => 
+        public async Task<Account> GetByEmailAsync(string email) =>
                 await Context.Set<Account>()
+                    .AsNoTracking()
                     .SingleOrDefaultAsync(x => x.Email == email);
     }
 }

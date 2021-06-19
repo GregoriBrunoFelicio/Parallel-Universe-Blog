@@ -23,7 +23,11 @@ namespace Parallel.Universe.Blog.Api.Controllers
 
         [HttpPut]
         [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> Put([FromBody] UserViewModel model) => Ok(await _userRepository.UpdateAsync(_mapper.Map<UserViewModel, User>(model)));
+        public async Task<IActionResult> Put([FromBody] UserViewModel model)
+        {
+            await _userRepository.UpdateAsync(_mapper.Map<UserViewModel, User>(model));
+            return Ok();
+        }
 
 
         [HttpPut("Inactivate/{id}")]
@@ -33,7 +37,8 @@ namespace Parallel.Universe.Blog.Api.Controllers
             var user = await _userRepository.GetByIdAsync(id);
             if (user == null) return NotFound("User not found.");
             user.SetActive(false);
-            return Ok(await _userRepository.UpdateAsync(user));
+            await _userRepository.UpdateAsync(user);
+            return Ok();
         }
     }
 }

@@ -17,6 +17,9 @@ namespace Parallel.Universe.Blog.Api.Data.Repositories
         {
         }
 
-        public async Task<IReadOnlyCollection<Post>> GetAllByPostId(int id) => await Context.Post.Where(x => x.Id == id).ToListAsync();
+        public async Task<IReadOnlyCollection<Post>> GetAllByPostId(int id) =>
+            await Context.Post.AsNoTracking()
+                .Where(x => x.Id == id)
+                .ToListAsync();
     }
 }

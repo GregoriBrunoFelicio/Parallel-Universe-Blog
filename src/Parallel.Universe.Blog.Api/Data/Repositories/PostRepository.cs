@@ -8,7 +8,7 @@ namespace Parallel.Universe.Blog.Api.Data.Repositories
 {
     public interface IPostRepository : IRepository<Post>
     {
-        public Task<IEnumerable<Post>> GetAllActivePostsAsync();
+        public Task<IReadOnlyCollection<Post>> GetAllActivePostsAsync();
     }
 
 
@@ -18,7 +18,11 @@ namespace Parallel.Universe.Blog.Api.Data.Repositories
         {
         }
 
-        public async Task<IEnumerable<Post>> GetAllActivePostsAsync() => await Context.Post.Where(x => x.Active).ToListAsync();
+        public async Task<IReadOnlyCollection<Post>> GetAllActivePostsAsync() =>
+            await Context.Post
+                .AsNoTracking()
+                .Where(x => x.Active)
+                .ToListAsync();
     }
 
 }
