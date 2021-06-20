@@ -3,7 +3,7 @@ using Parallel.Universe.Blog.Api.ViewModels;
 
 namespace Parallel.Universe.Blog.Tests.Shared.Builders
 {
-    public sealed class PostViewModelBuilder : Faker<PostViewModel>
+	public sealed class PostViewModelBuilder : Faker<PostViewModel>
 	{
 		public PostViewModelBuilder() =>
 				  RuleFor(x => x.Id, () => 0)

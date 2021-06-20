@@ -10,7 +10,7 @@ namespace Parallel.Universe.Blog.Api.Services
     public interface IAccountService
     {
         Task<IResult> Create(UserViewModel model);
-        Task<ILoginResult> Verify(LoginViewModel model);
+        Task<ILoginResult> Verify(LoginInputModel model);
     }
 
     public class AccountService : IAccountService
@@ -41,7 +41,7 @@ namespace Parallel.Universe.Blog.Api.Services
             return new Result("User created successfully.", true);
         }
 
-        public async Task<ILoginResult> Verify(LoginViewModel model)
+        public async Task<ILoginResult> Verify(LoginInputModel model)
         {
             var account = await _accountRepository.GetByEmailAsync(model.Email);
 

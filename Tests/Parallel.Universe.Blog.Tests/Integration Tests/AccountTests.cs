@@ -48,7 +48,7 @@ namespace Parallel.Universe.Blog.Tests.Integration_Tests
             {
                 Name = user.Name,
                 Active = true,
-                Account = new AccountViewModel
+                Account = new AccountInputModel
                 {
                     Email = user.Account.Email,
                     Password = user.Account.Password.Value,
@@ -79,7 +79,7 @@ namespace Parallel.Universe.Blog.Tests.Integration_Tests
             await userRepository.AddAsync(user);
             await Context.SaveChangesAsync();
 
-            var model = new LoginViewModel
+            var model = new LoginInputModel
             {
                 Email = user.Account.Email,
                 Password = password

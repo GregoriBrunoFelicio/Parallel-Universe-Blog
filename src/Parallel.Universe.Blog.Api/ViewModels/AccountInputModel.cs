@@ -2,7 +2,7 @@
 
 namespace Parallel.Universe.Blog.Api.ViewModels
 {
-    public class AccountViewModel
+    public class AccountInputModel
     {
         public int Id { get; set; }
 

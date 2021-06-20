@@ -24,7 +24,7 @@ namespace Parallel.Universe.Blog.Api.Controllers
         }
 
         [HttpPost("Login")]
-        public async Task<IActionResult> Login([FromBody] LoginViewModel model)
+        public async Task<IActionResult> Login([FromBody] LoginInputModel model)
         {
             var result = await _accountService.Verify(model);
             return !result.Success

@@ -40,7 +40,7 @@ namespace Parallel.Universe.Blog.Tests.Integration_Tests
                 Id = user.Id,
                 Name = user.Name,
                 Active = true,
-                Account = new AccountViewModel
+                Account = new AccountInputModel
                 {
                     Email = user.Account.Email,
                     Password = user.Account.Password.Value,

@@ -13,7 +13,7 @@ namespace Parallel.Universe.Blog.Api.ViewModels
         [StringLength(50, ErrorMessage = "About must be between {2} and {1} characters.", MinimumLength = 5)]
         public string About { get; set; }
 
-        public AccountViewModel Account { get; set; }
+        public AccountInputModel Account { get; set; }
 
         public bool Active { get; set; }
     }

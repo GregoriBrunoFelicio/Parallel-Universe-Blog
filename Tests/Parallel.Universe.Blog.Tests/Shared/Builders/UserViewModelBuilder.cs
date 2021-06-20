@@ -12,7 +12,7 @@ namespace Parallel.Universe.Blog.Tests.Shared.Builders
 
         public UserViewModelBuilder WithAccount()
         {
-            RuleFor(f => f.Account, f => new AccountViewModelBuilder());
+            RuleFor(f => f.Account, f => new AccountInputModelBuilder());
             return this;
         }
     }

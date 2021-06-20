@@ -2,7 +2,7 @@
 
 namespace Parallel.Universe.Blog.Api.ViewModels
 {
-    public class LoginViewModel
+    public class LoginInputModel
     {
         [Required(ErrorMessage = "The E-mail is required.")]
         public string Email { get; set; }

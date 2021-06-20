@@ -23,7 +23,7 @@ namespace Parallel.Universe.Blog.Tests.Unit_Tests.Services
         protected UserBuilder userBuilder;
         protected AccountBuilder accountBuilder;
         protected UserViewModelBuilder userViewModelBuilder;
-        protected AccountViewModelBuilder accountViewModelBuilder;
+        protected AccountInputModelBuilder accountViewModelBuilder;
 
         [OneTimeSetUp]
         public void SetUp()
@@ -36,7 +36,7 @@ namespace Parallel.Universe.Blog.Tests.Unit_Tests.Services
             userBuilder = new UserBuilder();
             accountBuilder = new AccountBuilder();
             userViewModelBuilder = new UserViewModelBuilder();
-            accountViewModelBuilder = new AccountViewModelBuilder();
+            accountViewModelBuilder = new AccountInputModelBuilder();
 
             accountService = new AccountService(
                 userRepositoryMock.Object,
@@ -99,7 +99,7 @@ namespace Parallel.Universe.Blog.Tests.Unit_Tests.Services
     public class VerifyTests : AccountServiceTests
     {
         private ILoginResult _result;
-        private LoginViewModel _model;
+        private LoginInputModel _model;
 
         [OneTimeSetUp]
         public new async Task SetUp()
@@ -107,7 +107,7 @@ namespace Parallel.Universe.Blog.Tests.Unit_Tests.Services
             var account = accountBuilder.Generate();
             var user = userBuilder.WithActive(true).Generate();
             account.SetUser(user);
-            _model = new LoginViewModel { Password = account.Password.Value };
+            _model = new LoginInputModel { Password = account.Password.Value };
 
             account.Password.Encrypt();
 
@@ -138,12 +138,12 @@ namespace Parallel.Universe.Blog.Tests.Unit_Tests.Services
     public class VerifyWhenAccountIsNotFound : AccountServiceTests
     {
         private ILoginResult _result;
-        private LoginViewModel _model;
+        private LoginInputModel _model;
 
         [OneTimeSetUp]
         public new async Task SetUp()
         {
-            _model = new AutoFaker<LoginViewModel>().Generate();
+            _model = new AutoFaker<LoginInputModel>().Generate();
             accountRepositoryMock.Setup(x => x.GetByEmailAsync(_model.Email)).ReturnsAsync(value: null);
             _result = await accountService.Verify(_model);
         }
@@ -159,13 +159,13 @@ namespace Parallel.Universe.Blog.Tests.Unit_Tests.Services
     public class VerifyWhenPasswordIsInvalid : AccountServiceTests
     {
         private ILoginResult _result;
-        private LoginViewModel _model;
+        private LoginInputModel _model;
 
         [OneTimeSetUp]
         public new async Task SetUp()
         {
             var account = accountBuilder.Generate();
-            _model = new AutoFaker<LoginViewModel>().Generate();
+            _model = new AutoFaker<LoginInputModel>().Generate();
             account.Password.Encrypt();
             accountRepositoryMock.Setup(x => x.GetByEmailAsync(_model.Email)).ReturnsAsync(account);
             _result = await accountService.Verify(_model);
