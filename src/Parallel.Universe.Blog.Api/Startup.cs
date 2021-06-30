@@ -34,13 +34,9 @@ namespace Parallel.Universe.Blog.Api
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            //if (env.IsDevelopment())
-            //{
             app.UseDeveloperExceptionPage();
             app.UseSwagger();
             app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Parallel.Universe.Blog.Api v1"));
-            //}
-
             app.UseHttpsRedirection();
             app.UseRouting();
             app.UseCors(x => x
@@ -54,6 +50,17 @@ namespace Parallel.Universe.Blog.Api
             {
                 endpoints.MapControllers();
             });
+        }
+
+        private string GetConnectionString()
+        {
+            var server = Configuration["DbServer"] ?? "localhost";
+            var port = Configuration["DbPort"] ?? "''";
+            var user = Configuration["DbUser"] ?? "''";
+            var password = Configuration["DbPassword"] ?? "''";
+            var database = Configuration["Database"] ?? "''";
+
+            return "";
         }
     }
 }
