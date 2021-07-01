@@ -22,10 +22,3 @@ steps:
 #     projects: '**/*Parallel.Universe.Blog.Tests/*.csproj'
 #     arguments: '--configuration $(buildConfiguration)'
 
-- task: AzureRmWebAppDeployment@4
-  inputs:
-    ConnectionType: 'AzureRM'
-    azureSubscription: 'Pago pelo Uso(1)(e454f754-949b-4107-9532-104b5e352024)'
-    appType: 'webAppLinux'
-    WebAppName: 'parallel-universe-blog-api'
-    packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
