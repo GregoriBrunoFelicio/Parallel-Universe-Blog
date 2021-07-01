@@ -51,16 +51,5 @@ namespace Parallel.Universe.Blog.Api
                 endpoints.MapControllers();
             });
         }
-
-        private string GetConnectionString()
-        {
-            var server = Configuration["DbServer"] ?? "localhost";
-            var port = Configuration["DbPort"] ?? "''";
-            var user = Configuration["DbUser"] ?? "''";
-            var password = Configuration["DbPassword"] ?? "''";
-            var database = Configuration["Database"] ?? "''";
-
-            return "";
-        }
     }
 }
