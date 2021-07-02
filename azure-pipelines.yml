@@ -31,3 +31,5 @@ steps:
     packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
 
 - task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)/drop.zip'
