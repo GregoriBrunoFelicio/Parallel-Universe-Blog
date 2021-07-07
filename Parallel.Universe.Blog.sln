@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Parallel.Universe.Blog.Api"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Parallel.Universe.Blog.Tests", "Tests\Parallel.Universe.Blog.Tests\Parallel.Universe.Blog.Tests.csproj", "{E41BE536-5DC1-4E0B-A472-81BBE5DC6139}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Parallel.Universe.Blog.Migrations", "src\Parallel.Universe.Blog.Migrations\Parallel.Universe.Blog.Migrations.csproj", "{D52C7592-0F87-43E8-8D83-8A200CBE3E3D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{E41BE536-5DC1-4E0B-A472-81BBE5DC6139}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E41BE536-5DC1-4E0B-A472-81BBE5DC6139}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E41BE536-5DC1-4E0B-A472-81BBE5DC6139}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D52C7592-0F87-43E8-8D83-8A200CBE3E3D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D52C7592-0F87-43E8-8D83-8A200CBE3E3D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D52C7592-0F87-43E8-8D83-8A200CBE3E3D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D52C7592-0F87-43E8-8D83-8A200CBE3E3D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
