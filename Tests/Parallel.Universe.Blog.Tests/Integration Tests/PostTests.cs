@@ -24,7 +24,6 @@ namespace Parallel.Universe.Blog.Tests.Integration_Tests
         [OneTimeSetUp]
         public new void SetUp()
         {
-
             postViewModelBuilder = new PostViewModelBuilder();
             postBuilder = new PostBuilder();
             userRepository = new UserRepository(Context);

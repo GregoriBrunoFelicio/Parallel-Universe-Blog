@@ -2,6 +2,7 @@
 using FluentAssertions;
 using Moq;
 using NUnit.Framework;
+using Parallel.Universe.Blog.Api.Data;
 using Parallel.Universe.Blog.Api.Data.Repositories;
 using Parallel.Universe.Blog.Api.Entities;
 using Parallel.Universe.Blog.Api.Services;
@@ -17,6 +18,7 @@ namespace Parallel.Universe.Blog.Tests.Unit_Tests.Services
         protected Mock<IPostRepository> postRepositoryMock;
         protected Mock<IUserRepository> userRepositoryMock;
         protected Mock<IMapper> mapperMock;
+        protected Mock<IUnitOfWork> unitOfWorkMock;
         protected PostService postService;
         protected PostViewModelBuilder postViewModelBuilder;
         protected PostBuilder postBuilder;
@@ -28,16 +30,16 @@ namespace Parallel.Universe.Blog.Tests.Unit_Tests.Services
             postRepositoryMock = new Mock<IPostRepository>();
             userRepositoryMock = new Mock<IUserRepository>();
             mapperMock = new Mock<IMapper>();
+            unitOfWorkMock = new Mock<IUnitOfWork>();
             postViewModelBuilder = new PostViewModelBuilder();
             postBuilder = new PostBuilder();
             userBuilder = new UserBuilder();
-            postService = new PostService(postRepositoryMock.Object, userRepositoryMock.Object, mapperMock.Object);
+            postService = new PostService(postRepositoryMock.Object, userRepositoryMock.Object, mapperMock.Object, unitOfWorkMock.Object);
         }
     }
 
     public class PostServiceCreateTests : PostServiceTest
     {
-
         private IResult result;
 
         [OneTimeSetUp]
