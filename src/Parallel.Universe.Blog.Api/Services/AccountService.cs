@@ -4,6 +4,7 @@ using Parallel.Universe.Blog.Api.Data.Repositories;
 using Parallel.Universe.Blog.Api.Entities;
 using Parallel.Universe.Blog.Api.Services.Results;
 using Parallel.Universe.Blog.Api.ViewModels;
+using System;
 using System.Threading.Tasks;
 
 namespace Parallel.Universe.Blog.Api.Services
@@ -33,17 +34,25 @@ namespace Parallel.Universe.Blog.Api.Services
 
         public async Task<IResult> Create(UserViewModel model)
         {
-            if (await EmailAlreadyRegistred(model.Account.Email)) return new Result("E-mail already registred.", false);
+            try
+            {
+                if (await EmailAlreadyRegistred(model.Account.Email)) return new Result("E-mail already registred.", false);
 
-            var user = _mapper.Map<UserViewModel, User>(model);
+                var user = _mapper.Map<UserViewModel, User>(model);
 
-            user.Account.Password.Encrypt();
+                user.Account.Password.Encrypt();
 
-            await _userRepository.AddAsync(user);
+                await _userRepository.AddAsync(user);
 
-            await _unitOfWork.CommitAsync();
-
-            return new Result("User created successfully.", true);
+                return await _unitOfWork.CommitAsync()
+                                 ? new Result("User created successfully.", true)
+                                 : new Result("Error to create user.", false);
+            }
+            catch (Exception exception)
+            {
+                await _unitOfWork.RoolBack();
+                return new Result(exception.Message, false);
+            }
         }
 
         public async Task<ILoginResult> Verify(LoginInputModel model)

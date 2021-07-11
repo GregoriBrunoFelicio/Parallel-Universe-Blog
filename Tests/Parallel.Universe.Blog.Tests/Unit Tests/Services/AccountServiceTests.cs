@@ -60,6 +60,7 @@ namespace Parallel.Universe.Blog.Tests.Unit_Tests.Services
             var model = userViewModelBuilder.WithAccount().Generate();
             var user = userBuilder.Generate();
             mapperMock.Setup(x => x.Map<UserViewModel, User>(model)).Returns(user);
+            unitOfWorkMock.Setup(x => x.CommitAsync()).ReturnsAsync(true);
             _result = await accountService.Create(model);
         }
 
