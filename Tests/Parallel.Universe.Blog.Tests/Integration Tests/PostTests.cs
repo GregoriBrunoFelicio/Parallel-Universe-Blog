@@ -16,8 +16,8 @@ namespace Parallel.Universe.Blog.Tests.Integration_Tests
     {
         protected PostViewModelBuilder postViewModelBuilder;
         protected PostBuilder postBuilder;
-        protected UserRepository userRepository;
-        protected PostRepository postRepository;
+        protected IUserRepository userRepository;
+        protected IPostRepository postRepository;
         protected IUnitOfWork unitOfWork;
 
 
@@ -84,5 +84,4 @@ namespace Parallel.Universe.Blog.Tests.Integration_Tests
             response.StatusCode.Should().Be(HttpStatusCode.OK);
         }
     }
-
 }
