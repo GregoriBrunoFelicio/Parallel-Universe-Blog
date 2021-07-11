@@ -1,5 +1,6 @@
 ﻿using FluentAssertions;
 using NUnit.Framework;
+using Parallel.Universe.Blog.Api.Data;
 using Parallel.Universe.Blog.Api.Data.Repositories;
 using Parallel.Universe.Blog.Api.Entities;
 using Parallel.Universe.Blog.Tests.Shared;
@@ -17,6 +18,7 @@ namespace Parallel.Universe.Blog.Tests.Integration_Tests
         protected PostBuilder postBuilder;
         protected UserRepository userRepository;
         protected PostRepository postRepository;
+        protected IUnitOfWork unitOfWork;
 
 
         [OneTimeSetUp]
@@ -27,6 +29,7 @@ namespace Parallel.Universe.Blog.Tests.Integration_Tests
             postBuilder = new PostBuilder();
             userRepository = new UserRepository(Context);
             postRepository = new PostRepository(Context);
+            unitOfWork = new UnitOfWork(Context);
         }
     }
 
@@ -53,11 +56,11 @@ namespace Parallel.Universe.Blog.Tests.Integration_Tests
         {
             var user = new UserBuilder().WithActive(true).Generate();
             await userRepository.AddAsync(user);
+            await unitOfWork.CommitAsync();
 
             var post = new Post(0, "Title", "Description", "Text", DateTime.Now, true, user.Id);
             await postRepository.AddAsync(post);
-
-            await Context.SaveChangesAsync();
+            await unitOfWork.CommitAsync();
 
             var response = await Client.GetAsync($"Post/{post.Id}");
             response.StatusCode.Should().Be(HttpStatusCode.OK);
@@ -71,11 +74,11 @@ namespace Parallel.Universe.Blog.Tests.Integration_Tests
         {
             var user = new UserBuilder().WithActive(true).Generate();
             await userRepository.AddAsync(user);
+            await unitOfWork.CommitAsync();
 
             var post = new Post(0, "Title", "Description", "Text", DateTime.Now, true, user.Id);
             await postRepository.AddAsync(post);
-
-            await Context.SaveChangesAsync();
+            await unitOfWork.CommitAsync();
 
             var response = await Client.GetAsync("Post/AllActive");
             response.StatusCode.Should().Be(HttpStatusCode.OK);
