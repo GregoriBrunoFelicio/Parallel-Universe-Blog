@@ -51,6 +51,7 @@ namespace Parallel.Universe.Blog.Tests.Unit_Tests.Services
 
             mapperMock.Setup(x => x.Map<Post>(model)).Returns(post);
             userRepositoryMock.Setup(x => x.GetByIdAsync(It.IsAny<int>())).ReturnsAsync(user);
+            unitOfWorkMock.Setup(x => x.CommitAsync()).ReturnsAsync(true);
             result = await postService.Create(model);
         }
 
@@ -125,6 +126,7 @@ namespace Parallel.Universe.Blog.Tests.Unit_Tests.Services
 
             mapperMock.Setup(x => x.Map<Post>(model)).Returns(post);
             userRepositoryMock.Setup(x => x.GetByIdAsync(It.IsAny<int>())).ReturnsAsync(user);
+            unitOfWorkMock.Setup(x => x.CommitAsync()).ReturnsAsync(true);
             result = await postService.Update(model);
         }
 

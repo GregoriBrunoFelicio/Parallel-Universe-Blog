@@ -34,6 +34,7 @@ namespace Parallel.Universe.Blog.Tests.Unit_Tests.Services
             accountRepositoryMock = new Mock<IAccountRepository>();
             tokenServiceMock = new Mock<ITokenService>();
             mapperMock = new Mock<IMapper>();
+            unitOfWorkMock = new Mock<IUnitOfWork>();
 
             userBuilder = new UserBuilder();
             accountBuilder = new AccountBuilder();
@@ -44,7 +45,8 @@ namespace Parallel.Universe.Blog.Tests.Unit_Tests.Services
                 userRepositoryMock.Object,
                 accountRepositoryMock.Object,
                 tokenServiceMock.Object,
-                mapperMock.Object, unitOfWorkMock.Object);
+                mapperMock.Object,
+                unitOfWorkMock.Object);
         }
     }
 
