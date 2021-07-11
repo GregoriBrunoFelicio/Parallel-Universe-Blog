@@ -1,5 +1,6 @@
 ﻿using FluentAssertions;
 using NUnit.Framework;
+using Parallel.Universe.Blog.Api.Data;
 using Parallel.Universe.Blog.Api.Data.Repositories;
 using Parallel.Universe.Blog.Api.ViewModels;
 using Parallel.Universe.Blog.Tests.Shared;
@@ -14,22 +15,21 @@ namespace Parallel.Universe.Blog.Tests.Integration_Tests
     {
         protected UserViewModelBuilder UserViewModelBuilder;
         protected UserBuilder UserBuilder;
-        protected UserRepository userRepository;
+        protected IUserRepository userRepository;
+        protected IUnitOfWork unitOfWork;
 
         [OneTimeSetUp]
         public new void SetUp()
         {
-
             UserViewModelBuilder = new UserViewModelBuilder();
             UserBuilder = new UserBuilder();
             userRepository = new UserRepository(Context);
-
+            unitOfWork = new UnitOfWork(Context);
         }
     }
 
     public class AccountCreateTests : AccountTests
     {
-
         [Test]
         public async Task ShouldReturnOk()
         {
@@ -57,7 +57,7 @@ namespace Parallel.Universe.Blog.Tests.Integration_Tests
             };
 
             await userRepository.AddAsync(user);
-            await Context.SaveChangesAsync();
+            await unitOfWork.CommitAsync();
 
             var response = await Client.PostAsJsonAsync("Account/Create", model);
             response.StatusCode.Should().Be(HttpStatusCode.BadRequest);
@@ -66,7 +66,6 @@ namespace Parallel.Universe.Blog.Tests.Integration_Tests
 
     public class LoginTests : AccountTests
     {
-
         [Test]
         public async Task ShouldReturnOk()
         {
@@ -77,7 +76,7 @@ namespace Parallel.Universe.Blog.Tests.Integration_Tests
             user.Account.Password.Encrypt();
 
             await userRepository.AddAsync(user);
-            await Context.SaveChangesAsync();
+            await unitOfWork.CommitAsync();
 
             var model = new LoginInputModel
             {

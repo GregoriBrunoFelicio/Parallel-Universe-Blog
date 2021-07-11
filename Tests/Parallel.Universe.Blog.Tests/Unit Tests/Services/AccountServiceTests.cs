@@ -3,6 +3,7 @@ using AutoMapper;
 using FluentAssertions;
 using Moq;
 using NUnit.Framework;
+using Parallel.Universe.Blog.Api.Data;
 using Parallel.Universe.Blog.Api.Data.Repositories;
 using Parallel.Universe.Blog.Api.Entities;
 using Parallel.Universe.Blog.Api.Services;
@@ -19,6 +20,7 @@ namespace Parallel.Universe.Blog.Tests.Unit_Tests.Services
         protected Mock<IAccountRepository> accountRepositoryMock;
         protected Mock<ITokenService> tokenServiceMock;
         protected Mock<IMapper> mapperMock;
+        protected Mock<IUnitOfWork> unitOfWorkMock;
         protected IAccountService accountService;
         protected UserBuilder userBuilder;
         protected AccountBuilder accountBuilder;
@@ -42,7 +44,7 @@ namespace Parallel.Universe.Blog.Tests.Unit_Tests.Services
                 userRepositoryMock.Object,
                 accountRepositoryMock.Object,
                 tokenServiceMock.Object,
-                mapperMock.Object);
+                mapperMock.Object, unitOfWorkMock.Object);
         }
     }
 

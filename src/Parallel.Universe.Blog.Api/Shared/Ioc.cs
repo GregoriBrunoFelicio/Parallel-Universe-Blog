@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using Parallel.Universe.Blog.Api.Data;
 using Parallel.Universe.Blog.Api.Data.Repositories;
 using Parallel.Universe.Blog.Api.Services;
 
@@ -16,6 +17,7 @@ namespace Parallel.Universe.Blog.Api.Shared
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IAccountRepository, AccountRepository>();
             services.AddScoped<ICommentRepository, CommentRepository>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
         }
     }
 }

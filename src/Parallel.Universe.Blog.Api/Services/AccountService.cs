@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Parallel.Universe.Blog.Api.Data;
 using Parallel.Universe.Blog.Api.Data.Repositories;
 using Parallel.Universe.Blog.Api.Entities;
 using Parallel.Universe.Blog.Api.Services.Results;
@@ -19,13 +20,15 @@ namespace Parallel.Universe.Blog.Api.Services
         private readonly IAccountRepository _accountRepository;
         private readonly ITokenService _tokenService;
         private readonly IMapper _mapper;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public AccountService(IUserRepository userRepository, IAccountRepository accountRepository, ITokenService tokenService, IMapper mapper)
+        public AccountService(IUserRepository userRepository, IAccountRepository accountRepository, ITokenService tokenService, IMapper mapper, IUnitOfWork unitOfWork)
         {
             _userRepository = userRepository;
             _accountRepository = accountRepository;
             _tokenService = tokenService;
             _mapper = mapper;
+            _unitOfWork = unitOfWork;
         }
 
         public async Task<IResult> Create(UserViewModel model)
@@ -37,6 +40,8 @@ namespace Parallel.Universe.Blog.Api.Services
             user.Account.Password.Encrypt();
 
             await _userRepository.AddAsync(user);
+
+            await _unitOfWork.CommitAsync();
 
             return new Result("User created successfully.", true);
         }
