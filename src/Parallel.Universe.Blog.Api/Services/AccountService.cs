@@ -50,7 +50,7 @@ namespace Parallel.Universe.Blog.Api.Services
             }
             catch (Exception exception)
             {
-                await _unitOfWork.RoolBack();
+                await _unitOfWork.RollBackAsync();
                 return new Result(exception.Message, false);
             }
         }

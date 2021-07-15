@@ -5,7 +5,7 @@ namespace Parallel.Universe.Blog.Api.Data
     public interface IUnitOfWork
     {
         Task<bool> CommitAsync();
-        Task RoolBack();
+        Task RollBackAsync();
     }
 
     public class UnitOfWork : IUnitOfWork
@@ -16,6 +16,6 @@ namespace Parallel.Universe.Blog.Api.Data
 
         public async Task<bool> CommitAsync() => await context.SaveChangesAsync() > 0;
 
-        public async Task RoolBack() => await context.DisposeAsync();
+        public async Task RollBackAsync() => await context.DisposeAsync();
     }
 }
