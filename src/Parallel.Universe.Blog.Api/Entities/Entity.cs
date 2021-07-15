@@ -5,7 +5,6 @@ namespace Parallel.Universe.Blog.Api.Entities
     {
         protected Entity()
         {
-
         }
 
         public virtual int Id { get; }

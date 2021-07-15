@@ -4,7 +4,7 @@ namespace Parallel.Universe.Blog.Api.Entities
 {
     public class Account : Entity
     {
-        public Account() { }
+        protected Account() { }
 
         public Account(int id, string email, Password password) : base(id)
         {

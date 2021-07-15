@@ -4,7 +4,7 @@ namespace Parallel.Universe.Blog.Api.Entities
 {
     public class User : Entity
     {
-        public User() { }
+        protected User() { }
 
         public User(int id, string name, string about) : base(id)
         {
@@ -25,6 +25,5 @@ namespace Parallel.Universe.Blog.Api.Entities
         public bool Active { get; }
         public virtual Account Account { get; }
         public virtual ICollection<Post> Posts { get; }
-
     }
 }

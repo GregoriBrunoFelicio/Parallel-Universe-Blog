@@ -4,7 +4,7 @@ namespace Parallel.Universe.Blog.Api.Entities
 {
     public class Comment : Entity
     {
-        public Comment()
+        protected Comment()
         {
         }
 

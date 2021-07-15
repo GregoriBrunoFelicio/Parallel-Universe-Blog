@@ -90,7 +90,7 @@ namespace Parallel.Universe.Blog.Tests.Unit_Tests.Services
         public new async Task SetUp()
         {
             var model = userViewModelBuilder.WithAccount().Generate();
-            accountRepositoryMock.Setup(x => x.GetByEmailAsync(It.IsAny<string>())).ReturnsAsync(new Account());
+            accountRepositoryMock.Setup(x => x.GetByEmailAsync(It.IsAny<string>())).ReturnsAsync(accountBuilder.Generate());
             _result = await accountService.Create(model);
         }
 

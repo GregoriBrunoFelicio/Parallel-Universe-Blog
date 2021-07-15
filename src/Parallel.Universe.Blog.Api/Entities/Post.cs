@@ -5,9 +5,8 @@ namespace Parallel.Universe.Blog.Api.Entities
 {
     public class Post : Entity
     {
-        public Post()
+        protected Post()
         {
-
         }
 
         public Post(int id, string title, string description, string text, int userId) : base(id)
