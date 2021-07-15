@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using Parallel.Universe.Blog.Api.Data;
 using Parallel.Universe.Blog.Api.Data.Repositories;
 using Parallel.Universe.Blog.Api.Entities;
 using Parallel.Universe.Blog.Api.ViewModels;
@@ -12,28 +13,34 @@ namespace Parallel.Universe.Blog.Api.Controllers
     [ApiController]
     public class CommentController : ControllerBase
     {
-        private readonly ICommentRepository _commentRepository;
-        private readonly IMapper _mapper;
+        private readonly ICommentRepository commentRepository;
+        private readonly IMapper mapper;
+        private readonly IUnitOfWork unitOfWork;
 
-        public CommentController(ICommentRepository commentRepository, IMapper mapper)
+        public CommentController(ICommentRepository commentRepository, IMapper mapper, IUnitOfWork unitOfWork)
         {
-            _commentRepository = commentRepository;
-            _mapper = mapper;
+            this.commentRepository = commentRepository;
+            this.mapper = mapper;
+            this.unitOfWork = unitOfWork;
         }
 
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] PostViewModel model)
         {
-            var post = _mapper.Map<Comment>(model);
-            await _commentRepository.AddAsync(post);
+            var post = mapper.Map<Comment>(model);
+            await commentRepository.AddAsync(post);
             return Ok();
         }
 
-        //[HttpDelete("{id}")]
-        //public async Task<IActionResult> Delete(int id) =>
-        //    (await _commentRepository.DeleteAsync(id)) ? (IActionResult)Ok() : BadRequest();
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            await commentRepository.DeleteAsync(id);
+
+            return await unitOfWork.CommitAsync() ? (IActionResult)Ok() : BadRequest();
+        }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> Get(int id) => Ok(_mapper.Map<IReadOnlyCollection<CommentViewModel>>(await _commentRepository.GetAllByPostId(id)));
+        public async Task<IActionResult> Get(int id) => Ok(mapper.Map<IReadOnlyCollection<CommentViewModel>>(await commentRepository.GetAllByPostId(id)));
     }
 }
