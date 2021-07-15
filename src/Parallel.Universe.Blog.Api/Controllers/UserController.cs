@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Parallel.Universe.Blog.Api.Data;
 using Parallel.Universe.Blog.Api.Data.Repositories;
 using Parallel.Universe.Blog.Api.Entities;
 using Parallel.Universe.Blog.Api.ViewModels;
@@ -12,21 +13,23 @@ namespace Parallel.Universe.Blog.Api.Controllers
     [Route("[controller]")]
     public class UserController : ControllerBase
     {
-        private readonly IUserRepository _userRepository;
-        private readonly IMapper _mapper;
+        private readonly IUserRepository userRepository;
+        private readonly IMapper mapper;
+        private readonly IUnitOfWork unitOfWork;
 
-        public UserController(IUserRepository userRepository, IMapper mapper)
+        public UserController(IUserRepository userRepository, IMapper mapper, IUnitOfWork unitOfWork)
         {
-            _userRepository = userRepository;
-            _mapper = mapper;
+            this.userRepository = userRepository;
+            this.mapper = mapper;
+            this.unitOfWork = unitOfWork;
         }
 
         [HttpPut]
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Put([FromBody] UserViewModel model)
         {
-            await _userRepository.UpdateAsync(_mapper.Map<UserViewModel, User>(model));
-            return Ok();
+            await userRepository.UpdateAsync(mapper.Map<UserViewModel, User>(model));
+            return await unitOfWork.CommitAsync() ? (IActionResult)Ok() : BadRequest();
         }
 
 
@@ -34,13 +37,15 @@ namespace Parallel.Universe.Blog.Api.Controllers
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Inactivate(int id)
         {
-            var userFromDb = await _userRepository.GetByIdAsync(id);
+            var userFromDb = await userRepository.GetByIdAsync(id);
+
             if (userFromDb == null) return NotFound("User not found.");
 
             var user = new User(id, userFromDb.Name, userFromDb.About, userFromDb.Account, false);
 
-            await _userRepository.UpdateAsync(user);
-            return Ok();
+            await userRepository.UpdateAsync(user);
+
+            return await unitOfWork.CommitAsync() ? (IActionResult)Ok() : BadRequest();
         }
     }
 }
