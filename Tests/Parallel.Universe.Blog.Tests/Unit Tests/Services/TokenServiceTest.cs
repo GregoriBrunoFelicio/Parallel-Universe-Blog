@@ -40,6 +40,6 @@ namespace Parallel.Universe.Blog.Tests.Unit_Tests.Services
 
 
         [Test]
-        public void ShouldNotBeEmpty() => tokenGenerated.Should().NotBeEmpty();
+        public void ShouldNotBeEmpty() => tokenGenerated.Should().BeEmpty();
     }
 }
