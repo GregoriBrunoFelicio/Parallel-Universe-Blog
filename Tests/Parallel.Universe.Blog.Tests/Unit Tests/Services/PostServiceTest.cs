@@ -139,8 +139,12 @@ namespace Parallel.Universe.Blog.Tests.Unit_Tests.Services
             userRepositoryMock.Verify(x => x.GetByIdAsync(It.IsAny<int>()), Times.Once);
 
         [Test]
-        public void ShouldCallMethodUpdateAAsync() =>
+        public void ShouldCallMethodUpdateAsync() =>
             postRepositoryMock.Verify(x => x.UpdateAsync(It.IsAny<Post>()), Times.Once);
+
+        [Test]
+        public void ShouldCAllMethodCommigAsync() =>
+            unitOfWorkMock.Verify(x => x.CommitAsync(), Times.Once);
 
         [Test]
         public void ShouldReturnTheCorrectResultMessage() =>
