@@ -1,12 +1,9 @@
-﻿using System;
-
-namespace Parallel.Universe.Blog.Migrations
+﻿namespace Parallel.Universe.Blog.Migrations
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main()
         {
-            Console.WriteLine("Hello World!");
         }
     }
 }

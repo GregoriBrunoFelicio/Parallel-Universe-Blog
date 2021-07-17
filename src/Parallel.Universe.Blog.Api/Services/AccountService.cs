@@ -36,7 +36,7 @@ namespace Parallel.Universe.Blog.Api.Services
         {
             try
             {
-                if (await EmailAlreadyRegistred(model.Account.Email)) return new Result("E-mail already registred.", false);
+                if (await EmailIsAlreadyRegistred(model.Account.Email)) return new Result("E-mail already registred.", false);
 
                 var user = _mapper.Map<UserViewModel, User>(model);
 
@@ -75,7 +75,7 @@ namespace Parallel.Universe.Blog.Api.Services
             return new LoginResult("Login successfully.", true, user, token);
         }
 
-        private async Task<bool> EmailAlreadyRegistred(string email) =>
+        private async Task<bool> EmailIsAlreadyRegistred(string email) =>
             (await _accountRepository.GetByEmailAsync(email)) is not null;
     }
 }
