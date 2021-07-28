@@ -1,10 +1,8 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Parallel.Universe.Blog.Api.Configurations;
-using Parallel.Universe.Blog.Api.Data;
 using Parallel.Universe.Blog.Api.Shared;
 
 namespace Parallel.Universe.Blog.Api
@@ -22,11 +20,8 @@ namespace Parallel.Universe.Blog.Api
         {
             services.AddControllers().ConfigureApiBehaviorOptions(options => options.SuppressModelStateInvalidFilter = true);
             services.AddAutoMapper(typeof(Startup));
-            services.AddDbContext<ParallelUniverseBlogContext>(x =>
-                x.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"))
-                    .UseLazyLoadingProxies());
-            services.AddApplicationInsightsTelemetry();
 
+            services.ConfigureEntityFramework(Configuration);
             services.ConfigureSwagger();
             services.RegisterServices();
             services.ConfigureAuthentication(Configuration);
@@ -35,14 +30,13 @@ namespace Parallel.Universe.Blog.Api
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             app.UseDeveloperExceptionPage();
-            app.UseSwagger();
-            app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Parallel.Universe.Blog.Api v1"));
+            app.UseSwaggerConfigurations();
             app.UseHttpsRedirection();
             app.UseRouting();
             app.UseCors(x => x
                 .AllowAnyMethod()
                 .AllowAnyHeader()
-                .SetIsOriginAllowed(origin => true)
+                .SetIsOriginAllowed(_ => true)
                 .AllowCredentials());
             app.UseAuthentication();
             app.UseAuthorization();

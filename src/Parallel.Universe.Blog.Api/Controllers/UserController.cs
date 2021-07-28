@@ -33,7 +33,7 @@ namespace Parallel.Universe.Blog.Api.Controllers
         }
 
 
-        [HttpPut("Inactivate/{id}")]
+        [HttpPut("Inactivate/{id:int}")]
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Inactivate(int id)
         {

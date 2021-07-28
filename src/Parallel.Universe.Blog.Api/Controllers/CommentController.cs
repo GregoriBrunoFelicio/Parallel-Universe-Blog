@@ -32,14 +32,14 @@ namespace Parallel.Universe.Blog.Api.Controllers
             return await unitOfWork.CommitAsync() ? (IActionResult)Ok() : BadRequest();
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("{id:int}")]
         public async Task<IActionResult> Delete(int id)
         {
             await commentRepository.DeleteAsync(id);
             return await unitOfWork.CommitAsync() ? (IActionResult)Ok() : BadRequest();
         }
 
-        [HttpGet("Post/{id}")]
+        [HttpGet("Post/{id:int}")]
         public async Task<IActionResult> Get(int id) => Ok(mapper.Map<IReadOnlyCollection<CommentViewModel>>(await commentRepository.GetAllByPostId(id)));
     }
 }

@@ -45,7 +45,7 @@ namespace Parallel.Universe.Blog.Api.Controllers
                 : Ok(result);
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{id:int}")]
         public async Task<IActionResult> GetById(int id) => Ok(_mapper.Map<PostViewModel>(await _postRepository.GetByIdAsync(id)));
 
         [HttpGet("AllActive")]
