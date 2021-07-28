@@ -27,9 +27,9 @@ namespace Parallel.Universe.Blog.Api
                     .UseLazyLoadingProxies());
             services.AddApplicationInsightsTelemetry();
 
-            Swagger.Configure(services);
-            Ioc.RegisterServices(services);
-            Authentication.Configure(services, Configuration.GetSection("TokenConfiguration").GetSection("Key").Value);
+            services.ConfigureSwagger();
+            services.RegisterServices();
+            services.ConfigureAuthentication(Configuration);
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

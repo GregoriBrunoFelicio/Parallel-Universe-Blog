@@ -7,7 +7,7 @@ namespace Parallel.Universe.Blog.Api.Shared
 {
     public static class Ioc
     {
-        public static void RegisterServices(IServiceCollection services)
+        public static void RegisterServices(this IServiceCollection services)
         {
             services.AddScoped<IAccountService, AccountService>();
             services.AddScoped<ITokenService, TokenService>();
