@@ -29,7 +29,7 @@ namespace Parallel.Universe.Blog.Api.Controllers
         public async Task<IActionResult> Put([FromBody] UserViewModel model)
         {
             await userRepository.UpdateAsync(mapper.Map<UserViewModel, User>(model));
-            return await unitOfWork.CommitAsync() ? (IActionResult)Ok() : BadRequest();
+            return await unitOfWork.CommitAsync() ? Ok() : BadRequest();
         }
 
 
@@ -45,7 +45,7 @@ namespace Parallel.Universe.Blog.Api.Controllers
 
             await userRepository.UpdateAsync(user);
 
-            return await unitOfWork.CommitAsync() ? (IActionResult)Ok() : BadRequest();
+            return await unitOfWork.CommitAsync() ? Ok() : BadRequest();
         }
     }
 }
