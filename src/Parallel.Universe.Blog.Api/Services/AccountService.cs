@@ -76,6 +76,6 @@ namespace Parallel.Universe.Blog.Api.Services
         }
 
         private async Task<bool> EmailIsAlreadyRegistred(string email) =>
-            (await _accountRepository.GetByEmailAsync(email)) is not null;
+            await _accountRepository.GetByEmailAsync(email) != null;
     }
 }

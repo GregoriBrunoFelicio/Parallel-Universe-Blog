@@ -7,7 +7,7 @@ using Parallel.Universe.Blog.Api.Data;
 
 namespace Parallel.Universe.Blog.Tests.Shared
 {
-    public class WebFactory : WebApplicationFactory<Startup>
+    public class BaseIntegrationTest : WebApplicationFactory<Startup>
     {
         protected override void ConfigureWebHost(IWebHostBuilder builder)
         {
@@ -22,7 +22,6 @@ namespace Parallel.Universe.Blog.Tests.Shared
                     configuracao.UseInMemoryDatabase("TestsDb");
                     configuracao.UseInternalServiceProvider(serviceProvider);
                 });
-
 
                 var sp = services.BuildServiceProvider();
                 using var scope = sp.CreateScope();

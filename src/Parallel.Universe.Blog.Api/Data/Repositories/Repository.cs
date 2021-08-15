@@ -31,7 +31,7 @@ namespace Parallel.Universe.Blog.Api.Data.Repositories
             Context.Entry(objFromDb).CurrentValues.SetValues(obj);
         }
 
-        public virtual async Task<T> GetByIdAsync(int id) => await _dbSet.AsNoTracking().SingleOrDefaultAsync(x => x.Id == id);
+        public virtual async Task<T> GetByIdAsync(int id) => await _dbSet.FirstOrDefaultAsync(x => x.Id == id);
 
         public virtual async Task DeleteAsync(int id) => Context.Remove(await _dbSet.FindAsync(id));
     }

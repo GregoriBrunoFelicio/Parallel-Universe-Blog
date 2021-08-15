@@ -4,6 +4,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Parallel.Universe.Blog.Api.Configurations;
 using Parallel.Universe.Blog.Api.Shared;
+using Serilog;
+using Serilog.Sinks.Elasticsearch;
+using System;
+
 
 namespace Parallel.Universe.Blog.Api
 {
@@ -12,6 +16,15 @@ namespace Parallel.Universe.Blog.Api
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+
+            var elasticUri = Configuration["ElasticConfiguration:Uri"];
+            Log.Logger = new LoggerConfiguration()
+                .Enrich.FromLogContext()
+                .WriteTo.Elasticsearch(new ElasticsearchSinkOptions(new Uri(elasticUri))
+                {
+                    AutoRegisterTemplate = true,
+                })
+                .CreateLogger();
         }
 
         public IConfiguration Configuration { get; }
@@ -25,6 +38,10 @@ namespace Parallel.Universe.Blog.Api
             services.ConfigureSwagger();
             services.RegisterServices();
             services.ConfigureAuthentication(Configuration);
+
+            services.AddLogging(loggingBuilder =>
+                loggingBuilder.AddSerilog(dispose: true));
+
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
