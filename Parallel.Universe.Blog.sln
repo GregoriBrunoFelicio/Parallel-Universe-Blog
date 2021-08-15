@@ -7,6 +7,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Parallel.Universe.Blog.Api"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Parallel.Universe.Blog.Tests", "Tests\Parallel.Universe.Blog.Tests\Parallel.Universe.Blog.Tests.csproj", "{E41BE536-5DC1-4E0B-A472-81BBE5DC6139}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{A553BC3A-CDDA-4FB4-95E8-F02EC360B879}"
+	ProjectSection(SolutionItems) = preProject
+		src\Parallel.Universe.Blog.Api\docker-compose.yml = src\Parallel.Universe.Blog.Api\docker-compose.yml
+		src\Parallel.Universe.Blog.Api\Dockerfile = src\Parallel.Universe.Blog.Api\Dockerfile
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
