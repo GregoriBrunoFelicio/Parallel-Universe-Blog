@@ -7,7 +7,7 @@ using Parallel.Universe.Blog.Api.Data;
 
 namespace Parallel.Universe.Blog.Tests.Shared
 {
-    public class BaseIntegrationTest : WebApplicationFactory<Startup>
+    public class CustomWebApplicationFactory : WebApplicationFactory<Startup>
     {
         protected override void ConfigureWebHost(IWebHostBuilder builder)
         {

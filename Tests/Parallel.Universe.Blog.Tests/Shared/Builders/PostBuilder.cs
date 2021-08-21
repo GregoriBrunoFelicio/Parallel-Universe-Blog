@@ -19,9 +19,16 @@ namespace Parallel.Universe.Blog.Tests.Shared.Builders
 
         public PostBuilder WithUserId(int userId)
         {
-            RuleFor(x => x.UserId, () => userId);
+            CustomInstantiator(f => new Post(
+                          0,
+                          f.Random.Words(),
+                          f.Random.Words(),
+                          f.Random.Words(),
+                          f.Date.Future(),
+                          f.Random.Bool(),
+                          userId
+                      ));
             return this;
         }
-
     }
 }

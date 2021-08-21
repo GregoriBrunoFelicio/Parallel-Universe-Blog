@@ -75,7 +75,8 @@ namespace Parallel.Universe.Blog.Tests.Integration_Tests
             await userRepository.AddAsync(user);
             await unitOfWork.CommitAsync();
 
-            var post = new Post(0, "Title", "Description", "Text", DateTime.Now, true, user.Id);
+            var post = postBuilder.WithUserId(user.Id).Generate();
+
             await postRepository.AddAsync(post);
             await unitOfWork.CommitAsync();
 

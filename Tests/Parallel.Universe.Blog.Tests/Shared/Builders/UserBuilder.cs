@@ -22,7 +22,7 @@ namespace Parallel.Universe.Blog.Tests.Shared.Builders
 
         public UserBuilder WithId(int id)
         {
-            RuleFor(x => x.Id, () => id);
+            CustomInstantiator(f => new User(id, f.Random.Word(), f.Random.Words(), new AccountBuilder(), f.Random.Bool()));
             return this;
         }
     }
