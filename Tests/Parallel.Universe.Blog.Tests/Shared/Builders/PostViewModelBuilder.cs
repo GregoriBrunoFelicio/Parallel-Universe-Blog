@@ -25,10 +25,11 @@ namespace Parallel.Universe.Blog.Tests.Shared.Builders
 
         public PostViewModelBuilder WithUserId(int userId)
         {
-            RuleFor(x => x.Id, () => userId)
+            RuleFor(x => x.Id, () => 0)
                 .RuleFor(x => x.Title, f => f.Random.Words())
                 .RuleFor(x => x.Description, f => f.Random.Words())
                 .RuleFor(x => x.Text, f => f.Random.Words())
+                .RuleFor(x => x.UserId, () => userId)
                 .RuleFor(x => x.Date, f => f.Date.Future());
             return this;
         }

@@ -62,10 +62,13 @@ namespace Parallel.Universe.Blog.Api.Services
                 var post = _mapper.Map<Post>(model);
 
                 var user = await _userRepository.GetByIdAsync(model.UserId);
+                var postFromDb = await _postRepository.GetByIdAsync(model.Id);
 
                 if (user == null) return new Result("User not found.", false);
 
                 if (!user.Active) return new Result("Inactive account.", false);
+
+                if (model.UserId != postFromDb.UserId) return new Result("Post does not belong to user.", false);
 
                 await _postRepository.UpdateAsync(post);
 
