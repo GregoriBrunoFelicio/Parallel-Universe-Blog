@@ -39,7 +39,7 @@ namespace Parallel.Universe.Blog.Tests.Integration_Tests
         {
             var user = new UserBuilder().WithActive(true).Generate();
             await userRepository.AddAsync(user);
-            await Context.SaveChangesAsync();
+            await unitOfWork.CommitAsync();
 
             var model = postViewModelBuilder.Generate();
             model.UserId = user.Id;

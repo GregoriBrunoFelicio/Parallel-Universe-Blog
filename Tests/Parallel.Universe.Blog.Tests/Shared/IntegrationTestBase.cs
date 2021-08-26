@@ -4,11 +4,10 @@ using Microsoft.Extensions.DependencyInjection;
 using NUnit.Framework;
 using Parallel.Universe.Blog.Api.Data;
 using System.Net.Http;
-using Xunit;
 
 namespace Parallel.Universe.Blog.Tests.Shared
 {
-    public class IntegrationBase : IClassFixture<CustomWebApplicationFactory>
+    public class IntegrationBase
     {
         protected HttpClient Client;
         protected ParallelUniverseBlogContext Context;
