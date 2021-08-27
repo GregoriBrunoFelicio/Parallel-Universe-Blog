@@ -7,6 +7,8 @@ using Parallel.Universe.Blog.Tests.Shared.Builders;
 using System.Net;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
+using Parallel.Universe.Blog.Tests.Shared.Builders.Models;
+using Parallel.Universe.Blog.Tests.Shared.Builders.ViewModels;
 
 namespace Parallel.Universe.Blog.Tests.Integration_Tests
 {

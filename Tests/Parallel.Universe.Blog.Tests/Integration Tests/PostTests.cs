@@ -2,10 +2,9 @@
 using NUnit.Framework;
 using Parallel.Universe.Blog.Api.Data;
 using Parallel.Universe.Blog.Api.Data.Repositories;
-using Parallel.Universe.Blog.Api.Entities;
 using Parallel.Universe.Blog.Tests.Shared;
-using Parallel.Universe.Blog.Tests.Shared.Builders;
-using System;
+using Parallel.Universe.Blog.Tests.Shared.Builders.Models;
+using Parallel.Universe.Blog.Tests.Shared.Builders.ViewModels;
 using System.Net;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
@@ -16,6 +15,7 @@ namespace Parallel.Universe.Blog.Tests.Integration_Tests
     {
         protected PostViewModelBuilder postViewModelBuilder;
         protected PostBuilder postBuilder;
+        protected UserBuilder userBuilder;
         protected IUserRepository userRepository;
         protected IPostRepository postRepository;
         protected IUnitOfWork unitOfWork;
@@ -26,6 +26,7 @@ namespace Parallel.Universe.Blog.Tests.Integration_Tests
         {
             postViewModelBuilder = new PostViewModelBuilder();
             postBuilder = new PostBuilder();
+            userBuilder = new UserBuilder();
             userRepository = new UserRepository(Context);
             postRepository = new PostRepository(Context);
             unitOfWork = new UnitOfWork(Context);
@@ -37,12 +38,16 @@ namespace Parallel.Universe.Blog.Tests.Integration_Tests
         [Test]
         public async Task ShouldReturnOk()
         {
-            var user = new UserBuilder().WithActive(true).Generate();
+            var user = userBuilder.WithActive(true).Generate();
             await userRepository.AddAsync(user);
             await unitOfWork.CommitAsync();
 
-            var model = postViewModelBuilder.Generate();
-            model.UserId = user.Id;
+            var model = postViewModelBuilder
+                .WithId(0)
+                .WithUserId(user.Id)
+                .WithActive(true)
+                .Generate();
+
             var response = await Client.PostAsJsonAsync("Post", model);
             response.StatusCode.Should().Be(HttpStatusCode.OK);
         }
@@ -57,7 +62,7 @@ namespace Parallel.Universe.Blog.Tests.Integration_Tests
             await userRepository.AddAsync(user);
             await unitOfWork.CommitAsync();
 
-            var post = new Post(0, "Title", "Description", "Text", DateTime.Now, true, user.Id);
+            var post = postBuilder.WithUserId(user.Id).Generate();
             await postRepository.AddAsync(post);
             await unitOfWork.CommitAsync();
 
@@ -76,7 +81,6 @@ namespace Parallel.Universe.Blog.Tests.Integration_Tests
             await unitOfWork.CommitAsync();
 
             var post = postBuilder.WithUserId(user.Id).Generate();
-
             await postRepository.AddAsync(post);
             await unitOfWork.CommitAsync();
 

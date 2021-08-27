@@ -10,6 +10,8 @@ using Parallel.Universe.Blog.Api.Services.Results;
 using Parallel.Universe.Blog.Api.ViewModels;
 using Parallel.Universe.Blog.Tests.Shared.Builders;
 using System.Threading.Tasks;
+using Parallel.Universe.Blog.Tests.Shared.Builders.Models;
+using Parallel.Universe.Blog.Tests.Shared.Builders.ViewModels;
 
 namespace Parallel.Universe.Blog.Tests.Unit_Tests.Services
 {

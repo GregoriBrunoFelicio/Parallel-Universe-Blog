@@ -4,6 +4,7 @@ using NUnit.Framework;
 using Parallel.Universe.Blog.Api.Services;
 using Parallel.Universe.Blog.Tests.Shared.Builders;
 using System.IO;
+using Parallel.Universe.Blog.Tests.Shared.Builders.Models;
 
 namespace Parallel.Universe.Blog.Tests.Unit_Tests.Services
 {

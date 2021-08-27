@@ -4,7 +4,8 @@ using Parallel.Universe.Blog.Api.Data;
 using Parallel.Universe.Blog.Api.Data.Repositories;
 using Parallel.Universe.Blog.Api.ViewModels;
 using Parallel.Universe.Blog.Tests.Shared;
-using Parallel.Universe.Blog.Tests.Shared.Builders;
+using Parallel.Universe.Blog.Tests.Shared.Builders.Models;
+using Parallel.Universe.Blog.Tests.Shared.Builders.ViewModels;
 using System.Net;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
@@ -38,26 +39,10 @@ namespace Parallel.Universe.Blog.Tests.Integration_Tests
             response.StatusCode.Should().Be(HttpStatusCode.OK);
         }
 
-
         [Test]
         public async Task ShouldReturnBadRequest()
         {
-            var user = UserBuilder.Generate();
-
-            var model = new UserViewModel
-            {
-                Name = user.Name,
-                Active = true,
-                Account = new AccountInputModel
-                {
-                    Email = user.Account.Email,
-                    Password = user.Account.Password.Value,
-                    PasswordConfirmation = user.Account.Password.Value
-                }
-            };
-
-            await userRepository.AddAsync(user);
-            await unitOfWork.CommitAsync();
+            var model = UserViewModelBuilder.Generate();
 
             var response = await Client.PostAsJsonAsync("Account/Create", model);
             response.StatusCode.Should().Be(HttpStatusCode.BadRequest);

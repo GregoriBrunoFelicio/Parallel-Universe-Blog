@@ -2,9 +2,9 @@
 using Parallel.Universe.Blog.Api.Entities;
 using Parallel.Universe.Blog.Api.Shared.ValueObjects;
 
-namespace Parallel.Universe.Blog.Tests.Shared.Builders
+namespace Parallel.Universe.Blog.Tests.Shared.Builders.Models
 {
-    public sealed class AccountBuilder: Faker<Account>
+    public sealed class AccountBuilder : Faker<Account>
     {
         public AccountBuilder() =>
             CustomInstantiator(f =>

@@ -1,7 +1,7 @@
 ﻿using Bogus;
 using Parallel.Universe.Blog.Api.Entities;
 
-namespace Parallel.Universe.Blog.Tests.Shared.Builders
+namespace Parallel.Universe.Blog.Tests.Shared.Builders.Models
 {
     public sealed class UserBuilder : Faker<User>
     {
