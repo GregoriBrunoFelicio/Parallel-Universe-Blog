@@ -43,7 +43,6 @@ namespace Parallel.Universe.Blog.Tests.Integration_Tests
             await unitOfWork.CommitAsync();
 
             var model = postViewModelBuilder
-                .WithId(0)
                 .WithUserId(user.Id)
                 .WithActive(true)
                 .Generate();

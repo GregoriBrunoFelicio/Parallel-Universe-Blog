@@ -8,10 +8,9 @@ using Parallel.Universe.Blog.Api.Entities;
 using Parallel.Universe.Blog.Api.Services;
 using Parallel.Universe.Blog.Api.Services.Results;
 using Parallel.Universe.Blog.Api.ViewModels;
-using Parallel.Universe.Blog.Tests.Shared.Builders;
-using System.Threading.Tasks;
 using Parallel.Universe.Blog.Tests.Shared.Builders.Models;
 using Parallel.Universe.Blog.Tests.Shared.Builders.ViewModels;
+using System.Threading.Tasks;
 
 namespace Parallel.Universe.Blog.Tests.Unit_Tests.Services
 {
@@ -54,6 +53,7 @@ namespace Parallel.Universe.Blog.Tests.Unit_Tests.Services
             mapperMock.Setup(x => x.Map<Post>(model)).Returns(post);
             userRepositoryMock.Setup(x => x.GetByIdAsync(It.IsAny<int>())).ReturnsAsync(user);
             unitOfWorkMock.Setup(x => x.CommitAsync()).ReturnsAsync(true);
+
             result = await postService.Create(model);
         }
 
@@ -85,13 +85,13 @@ namespace Parallel.Universe.Blog.Tests.Unit_Tests.Services
             var model = postViewModelBuilder.WithUserId(1).WithActive(true).Generate();
 
             mapperMock.Setup(x => x.Map<Post>(model)).Returns(post);
+            userRepositoryMock.Setup(x => x.GetByIdAsync(It.IsAny<int>())).ReturnsAsync(value: null);
             result = await postService.Create(model);
         }
 
         [Test]
         public void ShouldReturnTheCorrectResultMessage() =>
                     result.Message.Should().Be("User not found.");
-
     }
 
     public class PostServiceCreateInactiveAccount : PostServiceTest
