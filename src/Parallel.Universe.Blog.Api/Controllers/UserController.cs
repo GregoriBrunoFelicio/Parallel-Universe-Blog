@@ -28,7 +28,8 @@ namespace Parallel.Universe.Blog.Api.Controllers
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Put([FromBody] UserViewModel model)
         {
-            await userRepository.UpdateAsync(mapper.Map<UserViewModel, User>(model));
+            var user = mapper.Map<UserViewModel, User>(model);
+            await userRepository.UpdateAsync(user);
             return await unitOfWork.CommitAsync() ? Ok() : BadRequest();
         }
 
@@ -41,9 +42,7 @@ namespace Parallel.Universe.Blog.Api.Controllers
 
             if (userFromDb == null) return NotFound("User not found.");
 
-            var user = new User(id, userFromDb.Name, userFromDb.About, userFromDb.Account, false);
-
-            await userRepository.UpdateAsync(user);
+            await userRepository.Inactive(id);
 
             return await unitOfWork.CommitAsync() ? Ok() : BadRequest();
         }

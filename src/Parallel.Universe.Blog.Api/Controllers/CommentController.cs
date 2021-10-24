@@ -29,14 +29,14 @@ namespace Parallel.Universe.Blog.Api.Controllers
         {
             var post = mapper.Map<Comment>(model);
             await commentRepository.AddAsync(post);
-            return await unitOfWork.CommitAsync() ? Ok() : BadRequest();
+            return await unitOfWork.CommitAsync() ? Ok() : BadRequest("Error to create comment.");
         }
 
         [HttpDelete("{id:int}")]
         public async Task<IActionResult> Delete(int id)
         {
             await commentRepository.DeleteAsync(id);
-            return await unitOfWork.CommitAsync() ? Ok() : BadRequest();
+            return await unitOfWork.CommitAsync() ? Ok() : BadRequest("Error to delete comment.");
         }
 
         [HttpGet("Post/{id:int}")]

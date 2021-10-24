@@ -46,9 +46,13 @@ namespace Parallel.Universe.Blog.Api.Controllers
         }
 
         [HttpGet("{id:int}")]
-        public async Task<IActionResult> GetById(int id) => Ok(_mapper.Map<PostViewModel>(await _postRepository.GetByIdAsync(id)));
+        public async Task<IActionResult> GetById(int id) =>
+            Ok(_mapper.Map<PostViewModel>(
+                await _postRepository.GetByIdAsync(id)));
 
         [HttpGet("AllActive")]
-        public async Task<IActionResult> GetAllActive() => Ok(_mapper.Map<IEnumerable<PostViewModel>>(await _postRepository.GetAllActivePostsAsync()));
+        public async Task<IActionResult> GetAllActive() =>
+            Ok(_mapper.Map<IEnumerable<PostViewModel>>(
+                await _postRepository.GetAllActiveAsync()));
     }
 }
