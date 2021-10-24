@@ -19,11 +19,5 @@ namespace Parallel.Universe.Blog.Tests.Shared.Builders.Models
             CustomInstantiator(f => new User(0, f.Random.Word(), f.Random.Words(), new AccountBuilder(), active));
             return this;
         }
-
-        public UserBuilder WithId(int id)
-        {
-            CustomInstantiator(f => new User(id, f.Random.Word(), f.Random.Words(), new AccountBuilder(), f.Random.Bool()));
-            return this;
-        }
     }
 }

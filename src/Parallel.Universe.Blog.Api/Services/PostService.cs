@@ -34,13 +34,14 @@ namespace Parallel.Universe.Blog.Api.Services
         {
             try
             {
-                var post = _mapper.Map<Post>(model);
 
-                var user = await _userRepository.GetByIdAsync(post.UserId);
+                var user = await _userRepository.GetByIdAsync(model.UserId);
 
                 if (user == null) return new Result("User not found.", false);
 
                 if (!user.Active) return new Result("Inactive account.", false);
+
+                var post = _mapper.Map<Post>(model);
 
                 await _postRepository.AddAsync(post);
 
@@ -59,8 +60,6 @@ namespace Parallel.Universe.Blog.Api.Services
         {
             try
             {
-                var post = _mapper.Map<Post>(model);
-
                 var user = await _userRepository.GetByIdAsync(model.UserId);
                 var postFromDb = await _postRepository.GetByIdAsync(model.Id);
 
@@ -69,6 +68,8 @@ namespace Parallel.Universe.Blog.Api.Services
                 if (!user.Active) return new Result("Inactive account.", false);
 
                 if (model.UserId != postFromDb.UserId) return new Result("Post does not belong to user.", false);
+
+                var post = _mapper.Map<Post>(model);
 
                 await _postRepository.UpdateAsync(post);
 
