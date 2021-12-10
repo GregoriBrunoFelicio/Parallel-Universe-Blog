@@ -34,7 +34,6 @@ namespace Parallel.Universe.Blog.Api.Services
         {
             try
             {
-
                 var user = await _userRepository.GetByIdAsync(model.UserId);
 
                 if (user == null) return new Result("User not found.", false);

@@ -5,12 +5,12 @@ using Parallel.Universe.Blog.Api.Shared.ValueObjects;
 
 namespace Parallel.Universe.Blog.Tests.Unit_Tests.ValueObjects
 {
-    public class PaswordTests
+    public class PasswordTests
     {
-        private readonly Faker _faker = new Faker();
+        private readonly Faker _faker = new();
 
         [Test]
-        public void ShouldEncryptTheRecivedPassword()
+        public void ShouldEncryptTheReceivedPassword()
         {
             var value = _faker.Random.Word();
             var password = new Password(value);

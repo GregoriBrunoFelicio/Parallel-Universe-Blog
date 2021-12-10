@@ -2,9 +2,8 @@
 using Microsoft.Extensions.Configuration;
 using NUnit.Framework;
 using Parallel.Universe.Blog.Api.Services;
-using Parallel.Universe.Blog.Tests.Shared.Builders;
-using System.IO;
 using Parallel.Universe.Blog.Tests.Shared.Builders.Models;
+using System.IO;
 
 namespace Parallel.Universe.Blog.Tests.Unit_Tests.Services
 {
@@ -15,7 +14,7 @@ namespace Parallel.Universe.Blog.Tests.Unit_Tests.Services
         protected UserBuilder userBuilder;
 
         [OneTimeSetUp]
-        public void SetuUp()
+        public void SetUp()
         {
             configuration = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
@@ -33,7 +32,7 @@ namespace Parallel.Universe.Blog.Tests.Unit_Tests.Services
         private string tokenGenerated;
 
         [OneTimeSetUp]
-        public void SetUp()
+        public new void SetUp()
         {
             var user = userBuilder.Generate();
             tokenGenerated = tokenService.GenerateToken(user);

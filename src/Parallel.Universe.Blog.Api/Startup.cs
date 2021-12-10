@@ -41,7 +41,6 @@ namespace Parallel.Universe.Blog.Api
 
             services.AddLogging(loggingBuilder =>
                 loggingBuilder.AddSerilog(dispose: true));
-
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
