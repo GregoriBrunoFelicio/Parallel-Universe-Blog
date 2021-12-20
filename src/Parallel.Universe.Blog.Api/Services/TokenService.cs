@@ -11,7 +11,7 @@ namespace Parallel.Universe.Blog.Api.Services
 {
     public interface ITokenService
     {
-        string GenerateToken(User usuario);
+        string GenerateToken(User user);
     }
 
     public class TokenService : ITokenService
